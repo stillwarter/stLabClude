@@ -1,0 +1,105 @@
+.StBaseLayout {
+  box-sizing: border-box;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  .StHeader {
+    width: 100vw;
+    height: 30px;
+    background: pink;
+    color: #000;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+
+    .tipWords {
+      font-size: 12px;
+    }
+  }
+
+  .StFooter {
+    width: 100vw;
+    height: 30px;
+    background: #666;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    color: pink;
+  }
+
+  .StMain {
+    width: 100vw;
+    height: calc(100vh - 60px);
+    box-sizing: border-box;
+    display: flex;
+    position: relative;
+    top: 30px;
+    overflow-x: hidden;
+    transition: all 0.3s ease-in-out;
+    .StRouterSlider {
+      position: relative;
+      transition: all 0.25s ease-out;
+      width: 200px;
+      background: #888;
+      color: #fff;
+      height: calc(100vh - 60px);
+      box-sizing: border-box;
+      overflow: auto;
+      z-index: 10;
+      /* routerintem top index */
+      .routerTindex {
+        cursor: pointer;
+        font-size: 14px;
+        transition: all ease 0.3s;
+      }
+      .routerTindex:hover {
+        color: aqua;
+      }
+    }
+    .Strouter {
+      padding: 0px 12px;
+      width: 100%;
+      height: calc(100vh - 60px);
+      position: relative;
+      overflow: auto;
+
+      // animation: tt 2s ease-in-out infinite forwards;
+    }
+  }
+}
+
+/**/
+.routerChindex {
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 4px;
+}
+.routerChindex:hover {
+  color: aqua;
+}
+.routerpadding {
+  padding-left: 8px;
+}
+
+@keyframes MainViewRefRight {
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes MainViewRefLeft {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: 0;
+  }
+}
