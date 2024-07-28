@@ -5,6 +5,7 @@ import "./less/addMark.less";
 import { postImages } from "@/api/edit";
 import { postMardMd, postMardMd2, getMarkByName } from "@/api/mark";
 import { useRoute } from "vue-router";
+
 export default defineComponent({
   name: "PCAddMark",
   setup() {
@@ -58,12 +59,20 @@ export default defineComponent({
     const addImages = (data) => {
       data.map((item) => {
         postImages(item).then((res: any) => {
-          // const imginfo = JSON.parse(res.data);
-          const imginfo: any = null;
+          const imginfo = res.data;
+          // const imginfo: any = null;
+          // console.log(decodeURIComponent(imginfo.url));
+          console.log(
+            `\n\n ![${Date.now()}](${encodeURI(
+              imginfo.url.replace(/\\/g, "/")
+            )})`
+          );
 
           mdeditor.value.insert(() => {
             return {
-              targetValue: `\n\n ![${imginfo.imgname}](${imginfo.imgurl})`,
+              targetValue: `\n\n ![${Date.now()}](${imginfo.url
+                .replace(/\\/g, "/")
+                .replace(/localhost/g, "http://127.0.0.1")})`,
               select: true,
               deviationStart: 0,
               deviationEnd: 0,
@@ -73,7 +82,7 @@ export default defineComponent({
       });
     };
 
-    return () => (
+    return (): any => (
       <div class="addMark">
         <h1>Mark一下</h1>
         <div class="mdeditorbox">

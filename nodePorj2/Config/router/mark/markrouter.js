@@ -18,8 +18,9 @@ import {
   addIndexFile,
   delIndexFile,
 } from "../../../Utils/File/baseHandleIndexesFile.js";
+import { getImageData } from "./synchronous/synchronousToFishpi.js";
 
-export const markRouterConfig = {  
+export const markRouterConfig = {
   "/api/postMarkMd": {
     name: "postmarkmd",
     info: "上传markmd",
@@ -35,10 +36,15 @@ export const markRouterConfig = {
     info: "根据mark名获取对应文件内容",
     handle: getFileByName,
   },
-  "/api/delMarkByName": {
-    name: "delMarkByName",
-    info: "根据mark名删除对应文件",
-    handle: delFileByName,
+  "/api/synchronousToFishpi": {
+    name: "synchronousToFishpi",
+    info: "同步到鱼排",
+    handle: synchronousToFishpi,
+  },
+  "/api/synchronousToVitepress": {
+    name: "synchronousToVitepress",
+    info: "同步到vitepresss",
+    handle: synchronousToFishpi,
   },
 };
 
@@ -126,6 +132,7 @@ async function getFileByName(req, res) {
   resBackBySCode(201, res, message);
 }
 
+/* 根据文件名删除mark */
 function delFileByName(req, res) {
   // 参数获取
   const { markname, marktime } = req.parame;
@@ -149,4 +156,24 @@ function delFileByName(req, res) {
   delFile(filepath);
   // 完成返回
   resBackBySCode(200, res);
+}
+
+/* 同步mark到鱼排 */
+function synchronousToFishpi(req, res) {
+  // 示例用法
+  getImageData("http://127.0.0.1:3040/Static/image/2024/7/1722176179259.jpg")
+    .then((imageData) => {
+      // 这里得到的 imageData 就是图片的二进制数据
+      // console.log(imageData);
+      // 自定义返回
+      const message = {
+        code: 200,
+        message: "获取成功",
+        data: imageData,
+      };
+      resBackBySCode(201, res, message);
+    })
+    .catch((err) => {
+      console.error("获取图片数据时出错:", err);
+    });
 }

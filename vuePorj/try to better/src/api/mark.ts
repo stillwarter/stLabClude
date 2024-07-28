@@ -39,3 +39,11 @@ export function delMarkByName(data) {
     data,
   });
 }
+
+export function synchronousToFishpi(data) {
+  return request({
+    url: "/synchronousToFishpi",
+    method: "post",
+    data,
+  });
+}

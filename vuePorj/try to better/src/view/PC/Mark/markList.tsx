@@ -1,8 +1,8 @@
 import { defineComponent, ref } from "vue";
 import "./less/markList.less";
-import { getMarkList, delMarkByName } from "@/api/mark";
+import { getMarkList, delMarkByName, synchronousToFishpi } from "@/api/mark";
 import { useRouter } from "vue-router";
-
+import axios from "axios";
 // 样式后面调整
 
 export default defineComponent({
@@ -76,12 +76,34 @@ export default defineComponent({
     };
 
     /* 同步到鱼排 */
-    const syToFish=(v)=>{
-
-    }
+    const syToFish = (v) => {
+      synchronousToFishpi().then((res: any) => {
+        const imgbuffer = res.data.data;
+        const blob = new Blob([imgbuffer], {
+          type: "application/octet-stream",
+        });
+        // console.log(blob);
+        const params = {
+          file: [blob],
+        };
+        axios
+          .post("https://fishpi.cn/upload", params, {
+            headers: {
+              "Content-Type":
+                "multipart/form-data; boundary=----WebKitFormBoundary4BQ9nNARLGP1Jg5w",
+            },
+          })
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error("发生错误：", error);
+          });
+      });
+    };
 
     /* 同步到vitepress */
-    const syToVitepress=(v)=>{}
+    const syToVitepress = (v) => {};
 
     return () => (
       <>
