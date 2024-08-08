@@ -5,12 +5,14 @@ import "./less/addMark.less";
 import { postImages } from "@/api/edit";
 import { postMardMd, postMardMd2, getMarkByName } from "@/api/mark";
 import { useRoute } from "vue-router";
+import axios from "axios";
 
 export default defineComponent({
   name: "PCAddMark",
   setup() {
     const mdeditor: any = ref(null);
     const text = ref("## 编辑记录 or 日志 or 随笔(请编辑标题)");
+    const fishiImage = ref([]);
 
     /* 路由参数 */
     const Route = useRoute();
@@ -60,14 +62,6 @@ export default defineComponent({
       data.map((item) => {
         postImages(item).then((res: any) => {
           const imginfo = res.data;
-          // const imginfo: any = null;
-          // console.log(decodeURIComponent(imginfo.url));
-          console.log(
-            `\n\n ![${Date.now()}](${encodeURI(
-              imginfo.url.replace(/\\/g, "/")
-            )})`
-          );
-
           mdeditor.value.insert(() => {
             return {
               targetValue: `\n\n ![${Date.now()}](${imginfo.url
@@ -79,7 +73,31 @@ export default defineComponent({
             };
           });
         });
+        syfishpi(item);
       });
+    };
+
+    /* 同步到鱼排（暂时） */
+    const syfishpi = (v) => {
+      axios
+        .post(
+          "/fishapi/upload",
+          {
+            file: [v],
+          },
+          {
+            headers: {
+              "Content-Type":
+                "multipart/form-data; boundary=----WebKitFormBoundary",
+            },
+          }
+        )
+        .then((response) => {
+          fishiImage.value.push(response.data.data.succMap);
+        })
+        .catch((error) => {
+          console.error("发生错误：", error);
+        });
     };
 
     return (): any => (
