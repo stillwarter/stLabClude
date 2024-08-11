@@ -47,3 +47,11 @@ export function synchronousToFishpi(data) {
     data,
   });
 }
+
+export function getFileJsonInfo(data) {
+  return request({
+    url: "/getMarkIndexjsonByName",
+    method: "post",
+    data,
+  });
+}

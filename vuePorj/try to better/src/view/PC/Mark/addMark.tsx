@@ -3,7 +3,12 @@ import "md-editor-v3/lib/style.css";
 import { MdEditor } from "md-editor-v3";
 import "./less/addMark.less";
 import { postImages } from "@/api/edit";
-import { postMardMd, postMardMd2, getMarkByName } from "@/api/mark";
+import {
+  postMardMd,
+  postMardMd2,
+  getMarkByName,
+  getFileJsonInfo,
+} from "@/api/mark";
 import { useRoute } from "vue-router";
 import axios from "axios";
 
@@ -12,7 +17,7 @@ export default defineComponent({
   setup() {
     const mdeditor: any = ref(null);
     const text = ref("## 编辑记录 or 日志 or 随笔(请编辑标题)");
-    const fishiImage = ref([]);
+    const localImages = ref([]);
 
     /* 路由参数 */
     const Route = useRoute();
@@ -28,6 +33,10 @@ export default defineComponent({
               }).then((res: any) => {
                 if (res.data.code == 200) {
                   text.value = res.data.data;
+                  getFileJson({
+                    markname: marknameRef.value.markname,
+                    marktime: marknameRef.value.time,
+                  });
                 }
               })
             : (text.value = "## 编辑记录 or 日志 or 随笔(请编辑标题)")
@@ -44,37 +53,85 @@ export default defineComponent({
     //     markname: marknameRef.value,
     //   });
     // };
+    /* 根据mark名字获取对应json内容 */
+    const getFileJson = async (markname, marktime) => {
+      const res = await getFileJsonInfo({ markname, marktime });
+      res.status == 200 ? (localImages.value = res.data.markimages) : [];
+      console.log(localImages.value);
+    };
 
-    /* 上传 */
+    /* md上传 */
     const postmdValue = () => {
-      //   console.log(text.value);
       const title = getMdTitle(text.value);
-
       postMardMd2({
         filename: title,
         filetype: "md",
         filecontent: text.value,
+        filelocalimages: localImages.value,
+        fileissysfishpi:false,
+        fileissysvitepress:false
       });
     };
 
     /* 图片上传 */
     const addImages = (data) => {
       data.map((item) => {
-        postImages(item).then((res: any) => {
-          const imginfo = res.data;
+        addImages2Fish(item);
+        localImages2Local(item);
+      });
+    };
+
+    /* 本地图片上传 */
+    const localImages2Local = (v) => {
+      postImages(v).then((res: any) => {
+        const imginfo = res.data;
+        const itemurl = imginfo.url
+          .replace(/\\/g, "/")
+          .replace(/localhost/g, "http://127.0.0.1");
+        localImages.value.push(itemurl);
+        console.log(localImages.value);
+      });
+    };
+
+    /* 鱼排图片上传 */
+    const addImages2Fish = (v) => {
+      axios
+        .post(
+          "/fishapi/upload",
+          {
+            file: [v],
+          },
+          {
+            headers: {
+              "Content-Type":
+                "multipart/form-data; boundary=----WebKitFormBoundary",
+            },
+          }
+        )
+        .then((response) => {
+          // fishiImage.value.push(response.data.data.succMap);
+          console.log(response.data.data.succMap);
+          const urlobj = response.data.data.succMap;
+          const name = Object.keys(urlobj);
+          const url = Object.values(urlobj);
+
           mdeditor.value.insert(() => {
             return {
-              targetValue: `\n\n ![${Date.now()}](${imginfo.url
-                .replace(/\\/g, "/")
-                .replace(/localhost/g, "http://127.0.0.1")})`,
+              // 本地写法
+              // targetValue: `\n\n ![${Date.now()}](${imginfo.url
+              //   .replace(/\\/g, "/")
+              //   .replace(/localhost/g, "http://127.0.0.1")})`,
+              // fishpi
+              targetValue: `\n\n ![${name}](${url})`,
               select: true,
               deviationStart: 0,
               deviationEnd: 0,
             };
           });
+        })
+        .catch((error) => {
+          console.error("发生错误：", error);
         });
-        syfishpi(item);
-      });
     };
 
     /* 同步到鱼排（暂时） */

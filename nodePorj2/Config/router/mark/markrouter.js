@@ -36,6 +36,16 @@ export const markRouterConfig = {
     info: "根据mark名获取对应文件内容",
     handle: getFileByName,
   },
+  "/api/delMarkByName": {
+    name: "delMarkByName",
+    info: "根据mark名删除对应文件内容",
+    handle: delFileByName,
+  },
+  "/api/getMarkIndexjsonByName": {
+    name: "getJSONinfo",
+    info: "根据mark名称获取文件indexjson",
+    handle: getFileJsonByname,
+  },
   "/api/synchronousToFishpi": {
     name: "synchronousToFishpi",
     info: "同步到鱼排",
@@ -51,7 +61,14 @@ export const markRouterConfig = {
 /* 上传md文件 */
 function postMarkMd(req, res) {
   // 文件名获取
-  const { filecontent, filename, filetype } = req.parame;
+  const {
+    filecontent,
+    filename,
+    filetype,
+    filelocalimages,
+    fileissysfishpi,
+    fileissysvitepress,
+  } = req.parame;
   const filepath = path.join(markSavePath, filename + "." + filetype);
   // 文件写入
   addFile(markSavePath, filepath, filecontent);
@@ -62,6 +79,9 @@ function postMarkMd(req, res) {
     postime: dayjs().format("YYYY-MM-DD HH:mm:ss"),
     markname: filename,
     marktype: null,
+    markimages: filelocalimages || [],
+    fileissysfishpi,
+    fileissysvitepress,
   };
   addIndexFile(markIndexesSavePath, indexname, JSON.stringify(itemIndex));
   // 完成返回
@@ -156,6 +176,31 @@ function delFileByName(req, res) {
   delFile(filepath);
   // 完成返回
   resBackBySCode(200, res);
+}
+
+/* 根据文件名称获取文件的indexjson内容 */
+async function getFileJsonByname(req, res) {
+  // 获取参数
+  const { markname, marktime } = { ...req.parame.markname };
+  const mouth = Number(dayjs(marktime).month() + 1);
+  // 路径拼接
+  const jsonfilepath = path.join(
+    markSaveTopPath,
+    YEAR.toString(),
+    mouth.toString(),
+    "indexes.json"
+  );
+  // 文件读取
+  const ctx = await myreadFileSync(jsonfilepath, "utf-8");
+  const jsoninfo = JSON.parse(ctx);
+  const markjsoninfo = jsoninfo[markname];
+  // 自定义返回
+  const message = {
+    code: 200,
+    message: "获取成功",
+    data: ctx,
+  };
+  resBackBySCode(201, res, markjsoninfo);
 }
 
 /* 同步mark到鱼排 */

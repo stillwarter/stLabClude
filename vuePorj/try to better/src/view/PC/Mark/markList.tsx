@@ -6,6 +6,7 @@ import axios from "axios";
 import Toastify from "toastify-js";
 import md5 from "js-md5";
 import { getfishkey, postLocalMd } from "@/api/fishapi";
+import { getMarkByName, postmdValue } from "@/api/mark";
 // 样式后面调整
 
 export default defineComponent({
@@ -14,10 +15,7 @@ export default defineComponent({
     const listRef: any = ref([]);
     const Router = useRouter();
     // const fishkey = sessionStorage.getItem("fishkey");
-    const fishkeyref = ref(
-      "ec981fb5b02c194720e25b3b977b4923ecf3e417f322b6c419361d7573cc1832a67363bbc99717c60e7bca8bf0366a6f78868700bc60d6c18949b60a7e039afcc249f8adf4ffec36a45b4dc287a8d38ad5735399e667d21c5cc4c6ce663a3763"
-    );
-    // ec981fb5b02c194720e25b3b977b4923ecf3e417f322b6c419361d7573cc1832a67363bbc99717c60e7bca8bf0366a6f78868700bc60d6c18949b60a7e039afcc249f8adf4ffec36a45b4dc287a8d38ad5735399e667d21c5cc4c6ce663a3763
+    const fishkeyref = ref(null);
     /* 获取marklist */
     const getMarkAllList = () => {
       // 获取之前先清空当前list
@@ -25,7 +23,6 @@ export default defineComponent({
       getMarkList({
         year: null,
       }).then((res) => {
-        console.log(res.data.data);
         const listdata = res.data.data;
         for (const key in listdata) {
           const item = listdata[key];
@@ -84,58 +81,89 @@ export default defineComponent({
     };
 
     /* 同步 */
+    const sysMdData: any = ref(null);
     const syToFish = (v) => {
+      sysMdData.value = v;
       if (!fishkeyref.value) {
         openDialog();
       } else {
-        post2FishLocalMd();
+        // post2FishLocalMd();
+        openFormDialog();
       }
     };
 
     /* 上传本地md到鱼排 */
     // 默认不匿名可评论不通知关注者
+    const mdtypetext = ref("");
     const post2FishLocalMd = async () => {
-      const res = await postLocalMd({
-        apiKey: fishkeyref.value,
-        articleAnonymous: false,
-        articleCommentable: true,
-        articleContent: "这是一篇文章",
-        articleNotifyFollowers: false,
-        articleQnAOfferPoint: 5,
-        articleRewardContent: "谢谢老板",
-        articleRewardPoint: "5",
-        articleShowInList: 0,
-        articleTags: "摸鱼派,minecraft,游戏,迷宫",
-        articleTitle: "test startnode同步测试",
-        articleType: 0,
-        isGoodArticle: "no",
+      const typev = document.getElementById("mdtype").value;
+      mdtypetext.value = typev.replaceAll("，", ",");
+      const {
+        markname,
+        postime,
+        markimages,
+        fileissysfishpi,
+      } = sysMdData.value.data;
+      if (fileissysfishpi) {
+        Toastify({
+          text: "该文章已同步",
+          className: "toastifyinfo",
+          style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+            duration: 10000,
+          },
+        }).showToast();
+        return;
+      }
+
+      const res = await getMarkByName({
+        markname,
+        marktime: postime,
       });
 
-      if (res.data.code == 0) {
-        Toastify({
-          text: "同步成功",
-          className: "toastifyinfo",
-          style: {
-            background: "linear-gradient(to right, #00b09b, #96c93d)",
-            duration: 10000,
-          },
-        }).showToast();
-      } else {
-        Toastify({
-          text: "同步失败",
-          className: "toastifyinfo",
-          style: {
-            background: "linear-gradient(to right, #00b09b, #96c93d)",
-            duration: 10000,
-          },
-        }).showToast();
+      if (res.data.code == 200) {
+        const pres = await postLocalMd({
+          apiKey: fishkeyref.value,
+          articleContent: res.data.data,
+          articleTitle: markname,
+          ...sySetForm,
+        });
+
+        if (pres.data.code == 0) {
+          Toastify({
+            text: "同步成功",
+            className: "toastifyinfo",
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+              duration: 10000,
+            },
+          }).showToast();
+          closeFormDialog();
+          postMardMd2({
+            filename: markname,
+            filetype: "md",
+            filecontent: res.data.data,
+            filelocalimages: markimages,
+            fileissysfishpi: true,
+            fileissysvitepress: false,
+          });
+        } else {
+          Toastify({
+            text: "同步失败" + `${pres.data.msg}`,
+            className: "toastifyinfo",
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+              duration: 10000,
+            },
+          }).showToast();
+        }
       }
     };
 
     /* 同步到vitepress */
     const syToVitepress = (v) => {};
 
-    /* dialog控制 */
+    /* myDialog控制 */
     function openDialog() {
       Toastify({
         text: "请输入密码",
@@ -153,6 +181,18 @@ export default defineComponent({
       //  Toastify("11").show();
       document.getElementById("myDialog").close();
     }
+
+    /* 同步form默认值 */
+    const sySetForm = {
+      articleAnonymous: false, // 文章匿名
+      articleCommentable: true, // 文章可评论
+      articleNotifyFollowers: false, // 文章通知关注者
+      articleShowInList: 0, // 文章展示到公共列表
+      articleTags: mdtypetext.value,
+      articleType: 0,
+      isGoodArticle: "no",
+    };
+    const sySetFormRef = ref(sySetForm);
 
     /* 获取fish key值 */
     const getFishKey = async (e) => {
@@ -176,8 +216,21 @@ export default defineComponent({
       if (res.data.code == 0) {
         // sessionStorage.setItem("fishkey", res.data.key);
         fishkeyref.value = res.data.Key;
+        closeDialog();
+        setTimeout(() => {
+          openFormDialog();
+        }, 100);
       }
     };
+
+    /* formdialog控制 */
+    function openFormDialog() {
+      document.getElementById("sySetDialog").showModal();
+    }
+
+    function closeFormDialog() {
+      document.getElementById("sySetDialog").close();
+    }
 
     return () => (
       <>
@@ -205,6 +258,21 @@ export default defineComponent({
             确认
           </button>
           <button onclick={closeDialog}> 取消 </button>
+        </dialog>
+
+        <dialog id="sySetDialog">
+          <h2>鱼排同步设置</h2>
+          <span> 文章标签： </span>
+          <input type="text" id="mdtype" />
+          <br />
+          <br />
+          <button
+            onclick={(e) => post2FishLocalMd(e)}
+            style={{ marginRight: "10px" }}
+          >
+            确认
+          </button>
+          <button onclick={closeFormDialog}> 取消 </button>
         </dialog>
       </>
     );
