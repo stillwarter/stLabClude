@@ -16,7 +16,6 @@ const postsData = theme.value.posts;
 console.log(theme.value.other.post);
 
 
-
 </script>
 
 <style lang="less" scoped>

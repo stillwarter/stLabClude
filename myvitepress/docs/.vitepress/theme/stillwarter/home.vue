@@ -4,10 +4,7 @@
             移动端正在适配中
         </div>
         <homepc v-else />
-
-
         <stfooter v-show="footerView" />
-
     </div>
 </template>
 

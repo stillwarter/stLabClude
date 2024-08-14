@@ -6,6 +6,7 @@ import "./style.css";
 
 // my?
 import home from "./stillwarter/home.vue";
+import allBlogs from "./stillwarter/allBlogs.vue";
 
 export default {
   extends: DefaultTheme,
@@ -17,5 +18,6 @@ export default {
   enhanceApp({ app, router, siteData }) {
     // ...
     app.component("home", home);
+    app.component("allblogs", allBlogs);
   },
 } satisfies Theme;

@@ -9,7 +9,8 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
-      { text: "Examples", link: "/posts/tts" },
+      { text: "blogs", link: "/allBlogs" },
+      { text: "Examples", link: "/api-examples" },
     ],
     other: {
       post: await getPosts(),

@@ -1,5 +1,7 @@
 ---
-outline: deep
+outline: deep 
+
+date: 2012-02-12
 ---
 
 # Runtime API Examples
