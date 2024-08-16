@@ -7,9 +7,10 @@
 <script setup>
 import { useData, withBase } from "vitepress";
 import { ref } from "vue"
-const { theme } = useData();
+const { theme, title } = useData();
 const postsData = theme.value.posts;
 console.log(theme.value.other.post);
+// console.log(title.value);
 </script>
 
 <style lang="less" scoped>
