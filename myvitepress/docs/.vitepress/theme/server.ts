@@ -7,7 +7,6 @@ import dayjs from "dayjs";
 
 export async function getPosts() {
   let paths = await getPostMDFilePaths();
-
   let posts = await Promise.all(
     paths.map(async (item) => {
       const filename = getLastPartWithoutSuffix(item);
