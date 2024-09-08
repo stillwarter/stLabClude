@@ -22,10 +22,10 @@ const getMedia = () => {
     systemIsMobile.value = false;
   }
 };
+getMedia();
+
 
 onMounted(() => {
-  getMedia();
   window.addEventListener("resize", getMedia);
 });
 </script>
-
