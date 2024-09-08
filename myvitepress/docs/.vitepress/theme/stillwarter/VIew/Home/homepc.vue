@@ -13,7 +13,7 @@ import ZHinfoPC from "./child/ZHinfoPC.vue";
 
 const { theme } = useData();
 const postsData = theme.value.posts;
-console.log(theme.value.other.post);
+// console.log(theme.value.other.post);
 
 
 </script>

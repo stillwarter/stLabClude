@@ -9,7 +9,6 @@ import { useData, withBase } from "vitepress";
 import { ref } from "vue"
 const { theme } = useData();
 const postsData = theme.value.posts;
-console.log(theme.value.other.post);
 </script>
 
 <style lang="less" scoped>
