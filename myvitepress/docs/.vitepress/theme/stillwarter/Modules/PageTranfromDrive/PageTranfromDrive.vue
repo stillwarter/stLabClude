@@ -20,10 +20,10 @@ onMounted(() => {
   background: rgba(0, 0, 0, 0);
   z-index: 100;
 
-  animation-duration: 4s;
+  animation-duration: 1s;
   animation-timing-function: ease-in;
   // animation-delay: 0;
-  animation-fill-mode:forwards;
+  animation-fill-mode: forwards;
 
   border-radius: 50%;
   border-style: solid;
@@ -38,24 +38,24 @@ onMounted(() => {
 // 页面关闭
 @keyframes ClosePageAni {
   0% {
-    width: 400vw;
-    height: 400vw;
+    width: 330vw;
+    height: 330vw;
   }
   100% {
-    width: 0vw;
-    height: 0vh;
+    width: 30vw;
+    height: 30vh;
   }
 }
 
 // 页面打开
 @keyframes OpenPageAni {
   0% {
-    width: 0vw;
-    height: 0vh;
+    width: 30vw;
+    height: 30vh;
   }
   100% {
-    width: 400vw;
-    height: 400vw;
+    width: 330vw;
+    height: 330vw;
   }
 }
 </style>
