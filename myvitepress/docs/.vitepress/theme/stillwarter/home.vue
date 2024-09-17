@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { isMobile } from './Utils';
+import { isMobile } from './Utils/index.js';
 import { ref, onMounted } from "vue"
 import homepc from './VIew/Home/homepc.vue';
 import stfooter from './VIew/Footer/stfooter.vue';

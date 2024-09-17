@@ -13,7 +13,7 @@ export const PageTranfromDrive = () => {
 const nav = [
   { text: "Home", link: "/" },
   { text: "blogs", link: "/allBlogs" },
-  { text: "Examples", link: "/api-examples" },
+  { text: "friends", link: "/myFriends" },
 ];
 
 /* 重置a标签 阻止默认跳转 */

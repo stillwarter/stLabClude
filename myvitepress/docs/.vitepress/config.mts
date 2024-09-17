@@ -10,7 +10,7 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "blogs", link: "/allBlogs" },
-      { text: "Examples", link: "/api-examples" },
+      { text: "friends", link: "/myFriends" },
     ],
     other: {
       post: await getPosts(),

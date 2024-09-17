@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { isMobile } from "./Utils";
+import { isMobile } from "./Utils/index.js";
 import { ref, onMounted } from "vue";
 import Allblogspc from "./VIew/Allblogs/Allblogspc.vue";
 /* 默认是pc端口 */

@@ -6,7 +6,9 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { checkPageMoveState } from "./PageTranfromDrive";
 onMounted(() => {
-  checkPageMoveState();
+  setTimeout(() => {
+    checkPageMoveState();
+  }, 20);
 });
 </script>
 
@@ -27,7 +29,7 @@ onMounted(() => {
 
   border-radius: 50%;
   border-style: solid;
-  border-width: 100vw;
+  border-width: 99vw;
   border-color: #000;
   // border-color: transparent;
 
