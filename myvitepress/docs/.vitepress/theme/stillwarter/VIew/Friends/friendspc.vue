@@ -34,6 +34,7 @@ const targets = { table: [], sphere: [], helix: [], grid: [] };
 
 /* three场景初始化并加入到dom元素 */
 const Css3DInit = () => {
+  // 相机创建与初始化
   camera = new THREE.PerspectiveCamera(
     100,
     window.innerWidth / window.innerHeight,
@@ -43,10 +44,10 @@ const Css3DInit = () => {
   camera.position.z = 3000;
   scene = new THREE.Scene();
   renderer = new CSS3DRenderer();
-  //
+  // 创建3ddom？
   create3DObj();
   // 设置渲染范围并添加到dom
-  renderer.setSize(window.innerWidth , window.innerHeight - 64);
+  renderer.setSize(window.innerWidth, window.innerHeight - 64);
   document.getElementById("container").appendChild(renderer.domElement);
 
   transform(targets.table, 2000);
@@ -86,11 +87,14 @@ function animate() {
   // controls.update()
 }
 
+/* dom移动和初始化 */
 function transform(targets, duration) {
   TWEEN.removeAll();
+
   for (let i = 0; i < objects.length; i++) {
     const object = objects[i];
     const target = targets[i];
+
     new TWEEN.Tween(object.position)
       .to(
         { x: target.position.x, y: target.position.y, z: target.position.z },
@@ -138,8 +142,8 @@ onMounted(() => {
 
 .threedtry {
   .ele {
-    width: 120px;
-    height: 160px;
+    width: 800px;
+    height: 1040px;
     box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
     border: 1px solid rgba(127, 255, 255, 0.25);
     font-family: Helvetica, sans-serif;
