@@ -1,7 +1,11 @@
-<script setup></script>
+<script setup>
+import { RouterView } from "vue-router";
+import mainfooter from "./manFooter.vue";
+</script>
 
 <template>
   <div>
-    this is layout  
+    <RouterView />
+    <!-- <mainfooter /> -->
   </div>
 </template>

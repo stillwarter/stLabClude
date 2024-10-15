@@ -1,21 +1,33 @@
-const { app, BrowserWindow } = require('electron');
-const path = require('node:path');
-
+process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
+const { app, BrowserWindow } = require("electron");
+const path = require("node:path");
+const express = require("express");
+import { imageServerConfig } from "./config/baseConfig";
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
+if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
+let server;
+let mainWindow;
 const createWindow = () => {
+  // 启动 express 服务
+  const appExpress = express();
+  appExpress.use(express.static(imageServerConfig));
+
+  server = appExpress.listen(3011, () => {
+    console.log("Server running on port 3011");
+  });
+
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    title:'catbox',
+    title: "catbox",
     // frame: false, // 不显示边框和工具栏
     autoHideMenuBar: true, // 隐藏菜单栏
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, "preload.js"),
     },
   });
 
@@ -23,7 +35,9 @@ const createWindow = () => {
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
-    mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
+    mainWindow.loadFile(
+      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`)
+    );
   }
 
   // Open the DevTools.
@@ -38,7 +52,7 @@ app.whenReady().then(() => {
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  app.on('activate', () => {
+  app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
@@ -48,11 +62,20 @@ app.whenReady().then(() => {
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    server.close();
     app.quit();
   }
 });
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+/* 主进程ipc注册 测试 */
+import { regisDotest } from "./mainProcess/regis";
+regisDotest();
+
+/* note模块 注册 */
+import { regisNoteModule } from "./mainProcess/regisNote";
+regisNoteModule();
