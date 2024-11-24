@@ -1,18 +1,20 @@
 <template>
   <div class="homepcbox">
     <p class="hometitle">stillwarter blogs</p>
+
     <div v-for="(item, index) in yearmdlist" :key="index">
       <p style="font-size: 24px; margin: 8px 0px;">{{ item.year }}</p>
-      <div v-for="(mditem, mdindex) in item.value" :key="mdindex">
-        <!-- <div class="mditem" @click="toMdLink(mditem)">
+      <div class="yearbox">
+        <div v-for="(mditem, mdindex) in item.value" :key="mdindex">
+          <!-- <a class="mditem" :href="mditem.regularPath.replace('docs/', '')">
           <p>{{ mditem.filename }}</p>
           <p>{{ mditem.frontMatter.date }}</p>
-        </div> -->
-
-        <a class="mditem" :href="mditem.regularPath.replace('docs/', '')">
-          <p>{{ mditem.filename }}</p>
-          <p>{{ mditem.frontMatter.date }}</p>
-        </a>
+          
+        </a> -->
+          <a class="mditem" :href="mditem.regularPath.replace('docs/', '')"
+            ><blogCard :title="mditem.filename" :date="mditem.frontMatter.date"
+          /></a>
+        </div>
       </div>
     </div>
   </div>
@@ -21,6 +23,7 @@
 <script setup>
 import { useData, withBase } from "vitepress";
 import { ref } from "vue";
+import blogCard from "./blogcard/blogCard.vue";
 const { theme, title } = useData();
 const postsData = theme.value.posts;
 /* 初始mdlist*/
@@ -58,7 +61,7 @@ yearmdlist.value = obj2arry(ymdobj.value);
 <style lang="less" scoped>
 .homepcbox {
   /* width: 100%; */
-  max-width: 700px;
+  max-width: 840px;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
@@ -68,6 +71,11 @@ yearmdlist.value = obj2arry(ymdobj.value);
     margin-top: 30px;
     font-size: 20px;
     margin-bottom: 2rem;
+  }
+
+  .yearbox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

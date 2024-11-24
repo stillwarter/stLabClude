@@ -136,5 +136,13 @@ div {
   animation-iteration-count: infinite;
 }
 
-
-
+/*  */
+:root {
+  --blogcard-border-color: rgba(255, 255, 255, 0.4);
+  --blogcard-boxshdadow-color: rgba(0, 0, 0, 0.6);
+  
+}
+.dark {
+ --blogcard-border-color: rgba(1, 1, 1, 0.4);
+ --blogcard-boxshdadow-color: rgba(255, 255, 255,0.6);
+}

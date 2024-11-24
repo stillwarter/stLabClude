@@ -8,6 +8,7 @@ import {
   getCurrentInstance,
   getCurrentScope,
   h,
+  init_vue_runtime_esm_bundler,
   inject,
   isReactive,
   isReadonly,
@@ -33,10 +34,12 @@ import {
   version,
   watch,
   watchEffect
-} from "./chunk-KV7T6ZSY.js";
-import "./chunk-BUSYA2B4.js";
+} from "./chunk-3VR3GT4L.js";
+import "./chunk-DZZM6G22.js";
 
 // node_modules/vitepress/lib/vue-demi.mjs
+init_vue_runtime_esm_bundler();
+init_vue_runtime_esm_bundler();
 var isVue2 = false;
 var isVue3 = true;
 function set(target, key, val) {

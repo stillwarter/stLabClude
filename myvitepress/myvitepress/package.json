@@ -5,6 +5,7 @@
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
+    "@iconify/vue": "^4.1.2",
     "busuanzi.pure.js": "^1.0.3",
     "dayjs": "^1.11.12",
     "fs-extra": "^11.2.0",

@@ -4,6 +4,7 @@ import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import "./style.css";
 import { onMounted } from "vue";
+import { Icon } from "@iconify/vue/dist/iconify.js";
 
 // my?
 import home from "./stillwarter/home.vue";
@@ -47,6 +48,8 @@ export default {
     });
   },
   enhanceApp({ app, router, siteData }) {
+    // ...
+    app.component('Icon', Icon)
     // ...
     app.component("home", home);
     app.component("allblogs", allBlogs);
