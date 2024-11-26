@@ -61,9 +61,12 @@ function headMeunLink(e) {
 
 /* 关闭页面动画 */
 function ClosePageAni(appMaskDom) {
-  appMaskDom.style.zIndex = "100";
-  appMaskDom.style.animationName = "ClosePageAni";
-  appMaskDom.style.borderColor = "#000";
+  appMaskDom.style.display = "block";
+  setTimeout(() => {
+    appMaskDom.style.zIndex = "100";
+    appMaskDom.style.animationName = "ClosePageAni";
+    appMaskDom.style.borderColor = "#000";
+  }, 10);
 }
 
 /* 打开页面动画 */
@@ -71,6 +74,7 @@ function startTrans(appMaskDom) {
   appMaskDom.style.animationName = "OpenPageAni";
   setTimeout(() => {
     appMaskDom.style.zIndex = "-1";
+    appMaskDom.style.display = "none";
   }, (anidelay + 1) * 1000);
 }
 

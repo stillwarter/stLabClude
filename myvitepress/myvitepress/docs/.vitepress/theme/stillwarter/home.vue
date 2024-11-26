@@ -1,40 +1,39 @@
 <template>
-    <div class="stcommbox">
-        <div v-if="systemIsMobile">
-            移动端正在适配中
-        </div>
-        <homepc v-else />
-        <stfooter v-show="footerView" />
-    </div>
+  <div class="stcommbox">
+    <homemobile v-if="systemIsMobile" />
+    <homepc v-else />
+    <stfooter v-show="footerView" />
+  </div>
 </template>
 
 <script setup>
-import { isMobile } from './Utils/index.js';
-import { ref, onMounted } from "vue"
-import homepc from './VIew/Home/homepc.vue';
-import stfooter from './VIew/Footer/stfooter.vue';
+import { isMobile } from "./Utils/index.js";
+import { ref, onMounted } from "vue";
+import homepc from "./VIew/Home/homepc.vue";
+import homemobile from "./VIew/Home/homemobile.vue";
+import stfooter from "./VIew/Footer/stfooter.vue";
 
 /* footerConfig */
-const footerView = ref(true)
+const footerView = ref(true);
 
 /* 默认是pc端口 */
-const systemIsMobile = ref(false)
+const systemIsMobile = ref(false);
 if (isMobile()) {
-    systemIsMobile.value = true
+  systemIsMobile.value = true;
 } else {
-    systemIsMobile.value = false
+  systemIsMobile.value = false;
 }
 
 /* page 状态改变 */
 const getMedia = () => {
-    if (isMobile()) {
-        systemIsMobile.value = true;
-    } else {
-        systemIsMobile.value = false;
-    }
+  if (isMobile()) {
+    systemIsMobile.value = true;
+  } else {
+    systemIsMobile.value = false;
+  }
 };
 
 onMounted(() => {
-    window.addEventListener("resize", getMedia);
-})
+  window.addEventListener("resize", getMedia);
+});
 </script>

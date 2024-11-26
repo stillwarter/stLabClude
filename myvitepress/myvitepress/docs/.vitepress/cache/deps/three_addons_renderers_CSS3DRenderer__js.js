@@ -4,7 +4,7 @@ import {
   Quaternion,
   Vector3
 } from "./chunk-OQL7LXK7.js";
-import "./chunk-DZZM6G22.js";
+import "./chunk-V4OQ3NZ2.js";
 
 // node_modules/three/examples/jsm/renderers/CSS3DRenderer.js
 var _position = new Vector3();

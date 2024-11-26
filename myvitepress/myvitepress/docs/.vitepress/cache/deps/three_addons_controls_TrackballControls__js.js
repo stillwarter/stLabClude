@@ -6,7 +6,7 @@ import {
   Vector2,
   Vector3
 } from "./chunk-OQL7LXK7.js";
-import "./chunk-DZZM6G22.js";
+import "./chunk-V4OQ3NZ2.js";
 
 // node_modules/three/examples/jsm/controls/TrackballControls.js
 var _changeEvent = { type: "change" };

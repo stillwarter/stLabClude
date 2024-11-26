@@ -1,10 +1,11 @@
 <template>
-  <div id="appMask"></div>
+  <div id="appMask" v-if="!isMobile()"></div>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import { checkPageMoveState } from "./PageTranfromDrive";
+import { isMobile } from "../../Utils";
 onMounted(() => {
   setTimeout(() => {
     checkPageMoveState();

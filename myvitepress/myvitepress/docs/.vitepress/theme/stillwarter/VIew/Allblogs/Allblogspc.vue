@@ -3,7 +3,39 @@
     <p class="hometitle">stillwarter blogs</p>
 
     <div v-for="(item, index) in yearmdlist" :key="index">
-      <p style="font-size: 24px; margin: 8px 0px;">{{ item.year }}</p>
+      <p style="font-size: 24px; margin: 8px 0px">{{ item.year }}</p>
+      <div class="yearbox">
+        <div v-for="(mditem, mdindex) in item.value" :key="mdindex">
+          <!-- <a class="mditem" :href="mditem.regularPath.replace('docs/', '')">
+          <p>{{ mditem.filename }}</p>
+          <p>{{ mditem.frontMatter.date }}</p>
+          
+        </a> -->
+          <a class="mditem" :href="mditem.regularPath.replace('docs/', '')"
+            ><blogCard :title="mditem.filename" :date="mditem.frontMatter.date"
+          /></a>
+        </div>
+      </div>
+    </div>
+
+    <div v-for="(item, index) in yearmdlist" :key="index">
+      <p style="font-size: 24px; margin: 8px 0px">{{ item.year }}</p>
+      <div class="yearbox">
+        <div v-for="(mditem, mdindex) in item.value" :key="mdindex">
+          <!-- <a class="mditem" :href="mditem.regularPath.replace('docs/', '')">
+          <p>{{ mditem.filename }}</p>
+          <p>{{ mditem.frontMatter.date }}</p>
+          
+        </a> -->
+          <a class="mditem" :href="mditem.regularPath.replace('docs/', '')"
+            ><blogCard :title="mditem.filename" :date="mditem.frontMatter.date"
+          /></a>
+        </div>
+      </div>
+    </div>
+
+    <div v-for="(item, index) in yearmdlist" :key="index">
+      <p style="font-size: 24px; margin: 8px 0px">{{ item.year }}</p>
       <div class="yearbox">
         <div v-for="(mditem, mdindex) in item.value" :key="mdindex">
           <!-- <a class="mditem" :href="mditem.regularPath.replace('docs/', '')">
