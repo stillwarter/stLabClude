@@ -10,7 +10,7 @@ import { isMobile } from "../../Utils/index.js";
 const el = ref();
 let pendingTasks: Function[] = [];
 
-const pcClearTime = 15000;
+const pcClearTime = 12000;
 const mobileClearTime = 8000;
 
 interface Point {
@@ -42,9 +42,7 @@ onMounted(() => {
       pendingTasks = [];
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.strokeStyle = "#333";
-      if (!isMobile()) {
-        init(ctx);
-      }
+      init(ctx);
     }, 1000);
   };
 
@@ -53,7 +51,9 @@ onMounted(() => {
   // if (!isMobile()) {
   //   init(ctx);
   // }
-  init(ctx);
+  setTimeout(() => {
+    init(ctx);
+  }, 2000);
 
   function init(ctx) {
     ctx.strokeStyle = "#333";

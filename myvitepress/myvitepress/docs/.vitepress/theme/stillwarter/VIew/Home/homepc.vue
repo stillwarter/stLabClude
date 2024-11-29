@@ -1,20 +1,18 @@
 <template>
   <div class="homepcbox">
     <p class="hometitle">stillwarter 摸鱼达人 & 搬砖菜鸟 & 逐光者 & 弃梦人</p>
-    <p style="font-size: 12px; text-align: right">
-      <span style="cursor: pointer" @click="setZH">中文</span> /
-      <span style="cursor: pointer" @click="setEN">EN</span>
+    <p style="font-size: 12px; text-align: right;">
+      <span style="cursor: pointer;" @click="setZH">中文</span> /
+      <span style="cursor: pointer;" @click="setEN">EN</span>
     </p>
-    <ZHinfoPC v-if="lang == 'ZH'" />
-    <ENinfoPC v-else />
+    <Info :lang="lang" />
   </div>
 </template>
 
 <script setup>
 import { useData, withBase } from "vitepress";
 import { ref } from "vue";
-import ZHinfoPC from "./child/ZHinfoPC.vue";
-import ENinfoPC from "./child/ENinfoPC.vue";
+import Info from "./child/info.vue";
 
 const { theme } = useData();
 const postsData = theme.value.posts;

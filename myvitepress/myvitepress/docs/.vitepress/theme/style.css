@@ -93,6 +93,20 @@
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+::-webkit-scrollbar {
+    width: 4px; 
+    height: 4px; 
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--track-bg-color); 
+}
+
+
+::-webkit-scrollbar-thumb {
+    background-color: #ccc; 
+}
+
 /* page 通用commbox */
 .stcommbox {
   display: flex;
@@ -104,10 +118,11 @@
 /* page 通用footer */
 .stfooter {
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
   z-index: 11;
   width: 100%;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 /* 自定义font */
@@ -140,9 +155,11 @@ div {
 :root {
   --blogcard-border-color: rgba(255, 255, 255, 0.4);
   --blogcard-boxshdadow-color: rgba(0, 0, 0, 0.6);
+  --track-bg-color:#fff
   
 }
 .dark {
  --blogcard-border-color: rgba(1, 1, 1, 0.4);
  --blogcard-boxshdadow-color: rgba(255, 255, 255,0.6);
+ --track-bg-color:#000
 }
