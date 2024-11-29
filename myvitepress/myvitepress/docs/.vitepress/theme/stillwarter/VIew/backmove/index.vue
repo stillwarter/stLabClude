@@ -10,6 +10,9 @@ import { isMobile } from "../../Utils/index.js";
 const el = ref();
 let pendingTasks: Function[] = [];
 
+const pcClearTime = 15000;
+const mobileClearTime = 8000;
+
 interface Point {
   x: number;
   y: number;
@@ -25,7 +28,7 @@ window.addEventListener("load", function () {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   const ctx = el.value.getContext("2d");
-  ctx.strokeStyle = "#ccc";
+  ctx.strokeStyle = "#666";
 });
 
 onMounted(() => {
@@ -34,11 +37,11 @@ onMounted(() => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = el.value.getContext("2d");
-    ctx.strokeStyle = "#ccc";
+    ctx.strokeStyle = "#333";
     setTimeout(() => {
       pendingTasks = [];
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = "#ccc";
+      ctx.strokeStyle = "#333";
       if (!isMobile()) {
         init(ctx);
       }
@@ -47,12 +50,13 @@ onMounted(() => {
 
   const ctx = el.value.getContext("2d");
 
-  if (!isMobile()) {
-    init(ctx);
-  }
+  // if (!isMobile()) {
+  //   init(ctx);
+  // }
+  init(ctx);
 
   function init(ctx) {
-    ctx.strokeStyle = "#ccc";
+    ctx.strokeStyle = "#333";
 
     step(
       {
@@ -74,9 +78,12 @@ onMounted(() => {
       ctx
     );
 
-    setTimeout(() => {
-      pendingTasks = [];
-    }, 15000);
+    setTimeout(
+      () => {
+        pendingTasks = [];
+      },
+      isMobile() ? mobileClearTime : pcClearTime
+    );
   }
 
   function step(b: Branch, depth = 0, ctx) {

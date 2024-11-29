@@ -1,5 +1,6 @@
 <template>
   <div id="appMask" v-if="!isMobile()"></div>
+   <!-- <div id="appMask"></div> -->
 </template>
 
 <script setup>
