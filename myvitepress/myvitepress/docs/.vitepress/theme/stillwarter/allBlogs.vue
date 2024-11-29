@@ -1,8 +1,6 @@
 <template>
   <div class="stcommbox">
-    <div v-if="systemIsMobile">
-      移动端正在适配中
-    </div>
+    <Allblogsmobile v-if="systemIsMobile" />
     <Allblogspc v-else />
   </div>
 </template>
@@ -11,6 +9,7 @@
 import { isMobile } from "./Utils/index.js";
 import { ref, onMounted } from "vue";
 import Allblogspc from "./VIew/Allblogs/Allblogspc.vue";
+import Allblogsmobile from "./VIew/Allblogs/Allblogsmobile.vue";
 /* 默认是pc端口 */
 const systemIsMobile = ref(false);
 
@@ -23,7 +22,6 @@ const getMedia = () => {
   }
 };
 getMedia();
-
 
 onMounted(() => {
   window.addEventListener("resize", getMedia);
