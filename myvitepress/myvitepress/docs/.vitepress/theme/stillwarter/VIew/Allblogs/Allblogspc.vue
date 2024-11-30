@@ -64,7 +64,7 @@ yearmdlist.value = obj2arry(ymdobj.value);
 
   .hometitle {
     margin-top: 30px;
-    font-size: 20px;
+    font-size: 36px;
     margin-bottom: 2rem;
   }
 

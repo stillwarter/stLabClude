@@ -7,6 +7,8 @@ import "./style.css";
 import { Icon } from "@iconify/vue/dist/iconify.js";
 import antdVue from "ant-design-vue";
 import "ant-design-vue/dist/reset.css";
+import VueLazyLoad from 'vue-lazyload';
+
 
 // my?
 import home from "./stillwarter/home.vue";
@@ -37,7 +39,9 @@ export default {
             if (targetElement) {
               // console.log('目标元素出现了！');
               // 可以在这里执行你想要的操作
-              hiddenDomReset();
+              setTimeout(() => {
+                hiddenDomReset();
+              }, 0);
               // observer.disconnect(); // 停止观察，避免重复触发
             }
           }
@@ -57,8 +61,15 @@ export default {
     });
   },
   enhanceApp({ app, router, siteData }) {
-    //
+    //vue-design
     app.use(antdVue);
+    // 懒加载
+    app.use(VueLazyLoad, {
+      // error: '/static/images/defaultAvatar.png', // 此处是图片加载失败时候 显示的图片
+      // loading: '/static/images/defaultAvatar.png', // 此处是图片加载中 显示的图片
+      attempt: 1, // 加载一屏图片
+      preLoad: 1, // 失败尝试次数
+    });
     // ...
     app.component("Icon", Icon);
     // ...
@@ -69,3 +80,4 @@ export default {
     app.component("PageTranfromDrive", PageTranfromDrive);
   },
 } satisfies Theme;
+

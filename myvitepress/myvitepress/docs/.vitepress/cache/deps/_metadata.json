@@ -1,67 +1,73 @@
 {
-  "hash": "b005fe92",
+  "hash": "8e20cefa",
   "configHash": "e88a1b54",
-  "lockfileHash": "905093c6",
-  "browserHash": "b46f1e41",
+  "lockfileHash": "e36c5ed7",
+  "browserHash": "8dce13ff",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "f727712c",
+      "fileHash": "c3004a7e",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "cb7d48c7",
+      "fileHash": "5f83d07b",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "4b10557f",
+      "fileHash": "01617315",
       "needsInterop": false
     },
     "@iconify/vue/dist/iconify.js": {
       "src": "../../../../node_modules/@iconify/vue/dist/iconify.js",
       "file": "@iconify_vue_dist_iconify__js.js",
-      "fileHash": "00599208",
+      "fileHash": "6bd51b4b",
       "needsInterop": true
     },
     "busuanzi.pure.js": {
       "src": "../../../../node_modules/busuanzi.pure.js/index.js",
       "file": "busuanzi__pure__js.js",
-      "fileHash": "18b41c3e",
+      "fileHash": "09e35b42",
       "needsInterop": true
     },
     "three": {
       "src": "../../../../node_modules/three/build/three.module.js",
       "file": "three.js",
-      "fileHash": "80dd73f5",
+      "fileHash": "a62a918d",
       "needsInterop": false
     },
     "three/addons/controls/TrackballControls.js": {
       "src": "../../../../node_modules/three/examples/jsm/controls/TrackballControls.js",
       "file": "three_addons_controls_TrackballControls__js.js",
-      "fileHash": "5c408027",
+      "fileHash": "bba1f31a",
       "needsInterop": false
     },
     "three/addons/renderers/CSS3DRenderer.js": {
       "src": "../../../../node_modules/three/examples/jsm/renderers/CSS3DRenderer.js",
       "file": "three_addons_renderers_CSS3DRenderer__js.js",
-      "fileHash": "63731359",
+      "fileHash": "8f52eac8",
       "needsInterop": false
     },
     "three/addons/libs/tween.module.js": {
       "src": "../../../../node_modules/three/examples/jsm/libs/tween.module.js",
       "file": "three_addons_libs_tween__module__js.js",
-      "fileHash": "1f4c29d6",
+      "fileHash": "523b9f98",
       "needsInterop": false
     },
     "ant-design-vue": {
       "src": "../../../../node_modules/ant-design-vue/es/index.js",
       "file": "ant-design-vue.js",
-      "fileHash": "183dd8e7",
+      "fileHash": "7d9bc9a4",
+      "needsInterop": false
+    },
+    "vue-lazyload": {
+      "src": "../../../../node_modules/vue-lazyload/vue-lazyload.esm.js",
+      "file": "vue-lazyload.js",
+      "fileHash": "761ef1db",
       "needsInterop": false
     }
   },

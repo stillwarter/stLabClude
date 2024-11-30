@@ -10,7 +10,7 @@ import { isMobile } from "../../Utils/index.js";
 const el = ref();
 let pendingTasks: Function[] = [];
 
-const pcClearTime = 12000;
+const pcClearTime = 10000;
 const mobileClearTime = 8000;
 
 interface Point {
@@ -28,8 +28,17 @@ window.addEventListener("load", function () {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   const ctx = el.value.getContext("2d");
-  ctx.strokeStyle = "#666";
+  ctx.strokeStyle = "#999";
 });
+
+const unuseUrl = "myFriends";
+function useBM() {
+  if (window.location.href.includes(unuseUrl)) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
 onMounted(() => {
   window.onresize = function () {
@@ -37,12 +46,14 @@ onMounted(() => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = el.value.getContext("2d");
-    ctx.strokeStyle = "#333";
+    ctx.strokeStyle = "#777";
     setTimeout(() => {
       pendingTasks = [];
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = "#333";
-      init(ctx);
+      ctx.strokeStyle = "#777";
+      if (useBM()) {
+        init(ctx);
+      }
     }, 1000);
   };
 
@@ -52,11 +63,13 @@ onMounted(() => {
   //   init(ctx);
   // }
   setTimeout(() => {
-    init(ctx);
+    if (useBM()) {
+      init(ctx);
+    }
   }, 2000);
 
   function init(ctx) {
-    ctx.strokeStyle = "#333";
+    ctx.strokeStyle = "#777";
 
     step(
       {
@@ -134,7 +147,7 @@ onMounted(() => {
   function startFrame() {
     requestAnimationFrame(() => {
       framesCount += 1;
-      if (framesCount % 2 === 0) frame();
+      if (framesCount % 4 === 0) frame();
       startFrame();
     });
   }

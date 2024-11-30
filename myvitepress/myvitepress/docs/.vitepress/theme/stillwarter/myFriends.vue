@@ -1,10 +1,7 @@
 <template>
   <div class="stcommbox">
-    <div v-if="systemIsMobile">
-      移动端正在适配中
-    </div>
+    <friendsmobile v-if="isMobile()" />
     <friendspc v-else />
-    <!-- <stfooter v-show="footerView" /> -->
   </div>
 </template>
 
@@ -12,6 +9,7 @@
 import { isMobile } from "./Utils/index.js";
 import { ref, onMounted } from "vue";
 import friendspc from "./VIew/Friends/friendspc.vue";
+import friendsmobile from "./VIew/Friends/friendsmobile.vue";
 import stfooter from "./VIew/Footer/stfooter.vue";
 /* footerConfig */
 const footerView = ref(true);

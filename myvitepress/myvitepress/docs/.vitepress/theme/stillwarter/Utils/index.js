@@ -6,3 +6,6 @@ export function isMobile() {
     );
   return flag;
 }
+
+
+/* 窗口尺寸变化 监听设备是否改变类型 */

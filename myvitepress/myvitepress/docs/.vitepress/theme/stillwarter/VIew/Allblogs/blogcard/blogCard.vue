@@ -50,6 +50,9 @@ defineProps({
 </script>
 
 <style lang="less" scoped>
+p {
+  margin-bottom: 0;
+}
 .blogcardbox {
   width: 240px;
   height: 120px;

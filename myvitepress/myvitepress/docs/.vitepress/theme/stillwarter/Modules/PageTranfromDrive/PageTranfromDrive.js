@@ -7,7 +7,9 @@ export const anidelay = 1;
  */
 export const PageTranfromDrive = () => {
   resetHeadMeun();
-  setAniStatus();
+  setTimeout(() => {
+    setAniStatus();
+  }, 0);
 };
 
 const nav = [
@@ -37,12 +39,15 @@ export const checkPageMoveState = () => {
   }
 };
 
-/* 跳转点击（进入跳转动画 */
+/* 跳转点击（进入跳转动画） */
 function headMeunLink(e) {
   // console.log("进入跳转动画");
   const appMaskDom = document.querySelector("#appMask");
-  ClosePageAni(appMaskDom);
-  setAniStatus(true);
+  setTimeout(() => {
+    ClosePageAni(appMaskDom);
+    setAniStatus(true);
+  }, 0);
+
   setTimeout(() => {
     // window.location.href = "./allBlogs.html";
     // console.log(e.target.textContent);
@@ -56,17 +61,18 @@ function headMeunLink(e) {
         break;
       }
     }
-  }, (anidelay + 0.1) * 1000);
+  }, (anidelay + 0.1) * 1200);
 }
 
 /* 关闭页面动画 */
+/* 注意z-index的设置需要和appmask的样式内的z-index值一样，不然会有色差 */
 function ClosePageAni(appMaskDom) {
   appMaskDom.style.display = "block";
   setTimeout(() => {
     appMaskDom.style.zIndex = "100";
     appMaskDom.style.animationName = "ClosePageAni";
     appMaskDom.style.borderColor = "#000";
-  }, 10);
+  }, 0);
 }
 
 /* 打开页面动画 */

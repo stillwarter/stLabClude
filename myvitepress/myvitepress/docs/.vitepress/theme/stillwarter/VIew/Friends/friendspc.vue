@@ -1,168 +1,89 @@
 <template>
-  <div class="threedtry">
-    <div id="container"></div>
-  </div>
+  <BackRainbow>
+    <div class="friendspc">
+      <p class="hometitle">stillwarter的友人帐</p>
+      <p>
+        记录相遇的朋友，和我编的小故事，还有老师(虽然老师不认识我，厚颜称为老师)。
+        以及一些厉害的前辈们，和值得感谢的人们...
+      </p>
+
+      <p class="f28 mb20 mt40">鱼油</p>
+      <p>一起摸鱼的伙伴，相遇于偶然，下次见面会是什么时候呢？</p>
+      <div class="cardctx">
+        <friendscard
+          v-for="(item, index) in peopledata.fishfrends"
+          :key="index"
+          :data="item"
+        />
+      </div>
+
+      <p class="f28 mb20">老师</p>
+      <p>谢谢你的回答解开我的疑惑</p>
+       <div class="cardctx">
+        <friendscard
+          v-for="(item, index) in peopledata.teacherdata"
+          :key="index"
+          :data="item"
+        />
+      </div>
+
+      <p class="f28 mb20">大佬</p>
+      <p>领域内的传道者，是我值得学习的对象</p>
+       <div class="cardctx">
+        <friendscard
+          v-for="(item, index) in peopledata.bigstart"
+          :key="index"
+          :data="item"
+        />
+      </div>
+
+      <p class="f28 mb20">挚友</p>
+      <p>落日桥头晓风吹，冷月江畔一人寒。</p>
+       <div class="cardctx">
+        <friendscard
+          v-for="(item, index) in peopledata.bestfrends"
+          :key="index"
+          :data="item"
+        />
+      </div>
+    </div>
+  </BackRainbow>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
-import * as THREE from "three";
-import { TrackballControls } from "three/addons/controls/TrackballControls.js";
-import {
-  CSS3DRenderer,
-  CSS3DObject,
-} from "three/addons/renderers/CSS3DRenderer.js";
-import TWEEN from "three/addons/libs/tween.module.js";
-
-/**
- * 相机，场景，渲染器是不可缺少的
- *
- * 相机决定在三位场景中观察的视角和范围
- * 场景将所有的物体，光源，相机集合在一起，再页面上形成3d效果
- * 渲染器负责将3d数据转换为2d图形
- */
-let camera, scene, renderer;
-/**
- * controls 轨道控制器，用于控制整个3d场景（大概吧）
- */
-let controls;
-/**
- *
- */
-const objects = [];
-const targets = { table: [], sphere: [], helix: [], grid: [] };
-
-/* three场景初始化并加入到dom元素 */
-const Css3DInit = () => {
-  // 相机创建与初始化
-  camera = new THREE.PerspectiveCamera(
-    100,
-    window.innerWidth / window.innerHeight,
-    1,
-    10000
-  );
-  camera.position.z = 3000;
-  scene = new THREE.Scene();
-  renderer = new CSS3DRenderer();
-  // 创建3ddom？
-  create3DObj();
-  // 设置渲染范围并添加到dom
-  renderer.setSize(window.innerWidth, window.innerHeight - 64);
-  document.getElementById("container").appendChild(renderer.domElement);
-
-  transform(targets.table, 2000);
-};
-
-/* 创建一个css3d对象 */
-const create3DObj = () => {
-  const ele = document.createElement("div");
-  ele.className = "ele";
-
-  const number = document.createElement("div");
-  number.className = "num";
-  number.textContent = 12;
-  ele.appendChild(number);
-
-  const objectCSS = new CSS3DObject(ele);
-  objectCSS.position.x = Math.random() * 4000 - 2000;
-  objectCSS.position.y = Math.random() * 4000 - 2000;
-  objectCSS.position.z = Math.random() * 4000 - 2000;
-  scene.add(objectCSS);
-
-  objects.push(objectCSS);
-  const object = new THREE.Object3D();
-  // object.position.x = (table[i + 3] * 140) - 1530;
-  // object.position.y = - (table[i + 4] * 180) + 990;
-
-  targets.table.push(object);
-};
-
-function render() {
-  renderer.render(scene, camera);
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-  TWEEN.update();
-  // controls.update()
-}
-
-/* dom移动和初始化 */
-function transform(targets, duration) {
-  TWEEN.removeAll();
-
-  for (let i = 0; i < objects.length; i++) {
-    const object = objects[i];
-    const target = targets[i];
-
-    new TWEEN.Tween(object.position)
-      .to(
-        { x: target.position.x, y: target.position.y, z: target.position.z },
-        Math.random() * duration + duration
-      )
-      .easing(TWEEN.Easing.Exponential.InOut)
-      .start();
-
-    new TWEEN.Tween(object.rotation)
-      .to(
-        { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z },
-        Math.random() * duration + duration
-      )
-      .easing(TWEEN.Easing.Exponential.InOut)
-      .start();
-  }
-  new TWEEN.Tween(this)
-    .to({}, duration * 2)
-    .onUpdate(render)
-    .start();
-}
-
-/* */
-onMounted(() => {
-  Css3DInit();
-  animate();
-});
+import BackRainbow from "./backRainbow.vue";
+import friendscard from "./friendscard.vue";
+import { peopledata } from "./teacherinfo";
 </script>
 
-<style lang="less">
-.homepcbox {
-  /* width: 100%; */
-  max-width: 700px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0 12px;
-
+<style lang="less" scoped>
+.friendspc {
+  max-width: 1240px;
+  margin-top: 84px;
+  overflow: auto;
+  // color: #000;
   .hometitle {
     margin-top: 30px;
-    font-size: 20px;
+    font-size: 36px;
     margin-bottom: 2rem;
+  }
+  .cardctx {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 36px;
+    margin: 34px 0;
   }
 }
 
-.threedtry {
-  .ele {
-    width: 800px;
-    height: 1040px;
-    box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.5);
-    border: 1px solid rgba(127, 255, 255, 0.25);
-    font-family: Helvetica, sans-serif;
-    text-align: center;
-    line-height: normal;
-    cursor: default;
-  }
+.f28 {
+  font-size: 28px;
+}
 
-  .ele:hover {
-    box-shadow: 0px 0px 12px rgba(0, 255, 255, 0.75);
-    border: 1px solid rgba(127, 255, 255, 0.75);
-  }
+.mb20 {
+  margin-bottom: 20px;
+}
 
-  .ele .num {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 12px;
-    color: rgba(127, 255, 255, 0.75);
-  }
+.mt40 {
+  margin-top: 40px;
 }
 </style>

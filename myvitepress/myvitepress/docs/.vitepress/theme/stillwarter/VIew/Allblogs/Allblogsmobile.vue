@@ -58,9 +58,7 @@ yearmdlist.value = obj2arry(ymdobj.value);
   /* width: 100%; */
   max-width: 840px;
   position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0 12px;
+  margin: 0 1.6rem;
 
   .hometitle {
     margin-top: 30px;
