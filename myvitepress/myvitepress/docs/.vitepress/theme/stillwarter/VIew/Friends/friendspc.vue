@@ -19,7 +19,7 @@
 
       <p class="f28 mb20">老师</p>
       <p>谢谢你的回答解开我的疑惑</p>
-       <div class="cardctx">
+      <div class="cardctx">
         <friendscard
           v-for="(item, index) in peopledata.teacherdata"
           :key="index"
@@ -29,7 +29,7 @@
 
       <p class="f28 mb20">大佬</p>
       <p>领域内的传道者，是我值得学习的对象</p>
-       <div class="cardctx">
+      <div class="cardctx">
         <friendscard
           v-for="(item, index) in peopledata.bigstart"
           :key="index"
@@ -39,7 +39,7 @@
 
       <p class="f28 mb20">挚友</p>
       <p>落日桥头晓风吹，冷月江畔一人寒。</p>
-       <div class="cardctx">
+      <div class="cardctx">
         <friendscard
           v-for="(item, index) in peopledata.bestfrends"
           :key="index"
@@ -60,8 +60,9 @@ import { peopledata } from "./teacherinfo";
 .friendspc {
   max-width: 1240px;
   margin-top: 84px;
+  padding: 0 32px;
+  box-sizing: border-box;
   overflow: auto;
-  // color: #000;
   .hometitle {
     margin-top: 30px;
     font-size: 36px;

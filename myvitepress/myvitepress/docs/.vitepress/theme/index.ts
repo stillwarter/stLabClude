@@ -23,12 +23,15 @@ import {
 } from "./stillwarter/Modules/PageTranfromDrive/PageTranfromDrive.js";
 
 import bm from "./stillwarter/VIew/backmove/index.vue";
+import { checkWindow } from "./stillwarter/Utils/index.js";
 
 export default {
   extends: DefaultTheme,
 
   Layout: () => {
     window.onload = () => {
+      // 记录初始化页面尺寸
+      sessionStorage.setItem('windowW',window.innerWidth)
       PageTranfromDrivejs();
       // 监听隐藏的a标签
       const VPNavDom: any = document.querySelector(".VPNav");
@@ -53,7 +56,9 @@ export default {
       // 开始观察目标父元素
       observer.observe(VPNavDom, config);
     };
-    console.log(DefaultTheme.Layout);
+    
+    // 屏幕尺寸改变监听
+    checkWindow()
 
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots

@@ -41,8 +41,8 @@ onMounted(() => {
 // 页面关闭
 @keyframes ClosePageAni {
   0% {
-    width: 330vw;
-    height: 330vw;
+    width: 360vw;
+    height: 360vw;
   }
   100% {
     width: 30vw;
@@ -57,8 +57,8 @@ onMounted(() => {
     height: 30vh;
   }
   100% {
-    width: 330vw;
-    height: 330vw;
+    width: 360vw;
+    height: 360vw;
   }
 }
 </style>

@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { isMobile } from "../../Utils/index.js";
+import { isMobile, getTheme } from "../../Utils/index.js";
 const el = ref();
 let pendingTasks: Function[] = [];
 
@@ -28,7 +28,6 @@ window.addEventListener("load", function () {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   const ctx = el.value.getContext("2d");
-  ctx.strokeStyle = "#999";
 });
 
 const unuseUrl = "myFriends";
@@ -46,11 +45,9 @@ onMounted(() => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     const ctx = el.value.getContext("2d");
-    ctx.strokeStyle = "#777";
     setTimeout(() => {
       pendingTasks = [];
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = "#777";
       if (useBM()) {
         init(ctx);
       }
@@ -69,7 +66,12 @@ onMounted(() => {
   }, 2000);
 
   function init(ctx) {
-    ctx.strokeStyle = "#777";
+    const classn = getTheme();
+    if (classn == "day") {
+      ctx.strokeStyle = "#aaa";
+    } else {
+      ctx.strokeStyle = "#777";
+    }
 
     step(
       {
