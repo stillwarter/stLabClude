@@ -5,6 +5,7 @@ import { getPosts } from "./theme/server";
 export default defineConfig({
   title: "stillwarter",
   description: "no",
+  head: [["link", { ref: "icon", href: "/favicon.ico" }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -26,6 +27,6 @@ export default defineConfig({
     // ],
     socialLinks: [
       { icon: "github", link: "https://github.com/vuejs/vitepress" },
-    ]
+    ],
   },
 });

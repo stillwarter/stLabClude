@@ -60,7 +60,7 @@ const peopledata = {
         "https://file.fishpi.cn/2023/03/blob-3d8ffec1.png?imageView2/1/w/210/h/210/interlace/0/q/100",
       name: "三月柳絮四月雨",
       des: "我年华虚度，空有一身疲惫😭",
-      look: "感情上的迷途人..",
+      look: "股场中的迷途人..",
       link: "https://lemon-cxh.github.io",
       store: "",
       fishlink: "https://fishpi.cn/member/Lemon",

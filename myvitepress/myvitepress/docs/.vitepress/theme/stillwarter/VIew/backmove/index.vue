@@ -23,12 +23,6 @@ interface Branch {
   length: number;
   theta: number;
 }
-window.addEventListener("load", function () {
-  const canvas: any = document.getElementById("myCanvas");
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const ctx = el.value.getContext("2d");
-});
 
 const unuseUrl = "myFriends";
 function useBM() {
@@ -40,6 +34,13 @@ function useBM() {
 }
 
 onMounted(() => {
+  window.addEventListener("load", function () {
+    const canvas: any = document.getElementById("myCanvas");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = el.value.getContext("2d");
+  });
+
   window.onresize = function () {
     const canvas: any = document.getElementById("myCanvas");
     canvas.width = window.innerWidth;

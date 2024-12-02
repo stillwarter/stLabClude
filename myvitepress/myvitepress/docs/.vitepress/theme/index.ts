@@ -32,6 +32,7 @@ export default {
     window.onload = () => {
       // 记录初始化页面尺寸
       sessionStorage.setItem('windowW',window.innerWidth)
+      // 初始化pageAniStatus·
       PageTranfromDrivejs();
       // 监听隐藏的a标签
       const VPNavDom: any = document.querySelector(".VPNav");

@@ -7,9 +7,9 @@ export const anidelay = 1;
  */
 export const PageTranfromDrive = () => {
   resetHeadMeun();
-  setTimeout(() => {
-    setAniStatus();
-  }, 0);
+  // setTimeout(() => {
+  //   setAniStatus();
+  // }, 0);
 };
 
 const nav = [
@@ -32,11 +32,13 @@ function resetHeadMeun() {
 /* 维护一下动画状态 */
 /* 判断是否需要加载 */
 export const checkPageMoveState = () => {
-  const state = localStorage.getItem("pageAniStatus");
-  if (state) {
-    const appMaskDom = document.querySelector("#appMask");
-    startTrans(appMaskDom);
-  }
+  // const state = localStorage.getItem("pageAniStatus");
+  // if (state) {
+  //   const appMaskDom = document.querySelector("#appMask");
+  //   startTrans(appMaskDom);
+  // }
+  const appMaskDom = document.querySelector("#appMask");
+  startTrans(appMaskDom);
 };
 
 /* 跳转点击（进入跳转动画） */
@@ -45,7 +47,7 @@ function headMeunLink(e) {
   const appMaskDom = document.querySelector("#appMask");
   setTimeout(() => {
     ClosePageAni(appMaskDom);
-    setAniStatus(true);
+    // setAniStatus(true);
   }, 0);
 
   setTimeout(() => {
