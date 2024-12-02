@@ -3,11 +3,11 @@
  */
 const nd = (new Date().getFullYear() - 2022 + 1).toString();
 export const zhLang = {
-  hello: "你好，我是stillwarter，一名职业前端开发者简直网上摸鱼人。",
+  hello: "你好，我是stillwarter，一名职业前端开发者兼职网上摸鱼人。",
   share: "这里分享我" + nd + "年的工作情况。",
   reason:
     "作为一名前端开发人员，我偶尔会记录一些工作或学习过程，然后把它们写在这个博客上。",
-  try: " 闲暇时分我去会做一些新尝试，比如：",
+  try: "闲暇时分我去会做一些新尝试，比如：",
   e1: {
     url: "https://fishpi.cn/article/1713080276176",
     info: "一个vscode的语音插件",
@@ -20,7 +20,7 @@ export const zhLang = {
     url: "https://fishpi.cn/article/1689702695550",
     info: "像素动画探索",
   },
-  hb: "除了编程，我同样喜欢音乐和阅读，你可以在fishpi里进行更多互动。",
+  hb: "除了编程，我同样喜欢音乐和阅读，你可以在fishpi浏览更多相关帖子并进行互动。",
   findme: "哪里可以找到我？",
 };
 
@@ -45,7 +45,6 @@ export const enLang = {
     url: "https://fishpi.cn/article/1689702695550",
     info: "Try to render pixel animation",
   },
-  hb:
-    "Outside of programming, I enjoy music and traveling,you can find trave recod in fihspi",
+  hb: "Outside of programming, I enjoy music and reading,you could find that recod in fihspi",
   findme: " Find me on: ",
 };
