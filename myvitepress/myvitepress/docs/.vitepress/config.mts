@@ -8,7 +8,7 @@ export default defineConfig({
   description: "no",
   head: [
     ["link", { ref: "icon", href: "/favicon.ico" }],
-    ["script", {}, tts()],
+    // ["script", {}, tts()],
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config

@@ -1,6 +1,6 @@
 <template>
   <div id="appMask" v-if="!isMobile()"></div>
-   <!-- <div id="appMask"></div> -->
+  <!-- <div id="appMask"></div> -->
 </template>
 
 <script setup>
@@ -8,10 +8,21 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { checkPageMoveState } from "./PageTranfromDrive";
 import { isMobile } from "../../Utils";
 onMounted(() => {
+  cccc();
   setTimeout(() => {
     checkPageMoveState();
   }, 20);
 });
+
+function cccc() {
+  setInterval(() => {
+    if (document.readyState === "complete") {
+      console.log(1);
+    } else {
+      console.log(2);
+    }
+  }, 1000);
+}
 </script>
 
 <style lang="less">
@@ -21,7 +32,7 @@ onMounted(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 100 ;
+  z-index: 100;
 
   animation-duration: 1s;
   animation-timing-function: ease-in;
