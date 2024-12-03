@@ -1,11 +1,15 @@
 import { defineConfig } from "vitepress";
 import { getPosts } from "./theme/server";
+import { tts } from "./theme/stillwarter/Utils";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "stillwarter",
   description: "no",
-  head: [["link", { ref: "icon", href: "/favicon.ico" }]],
+  head: [
+    ["link", { ref: "icon", href: "/favicon.ico" }],
+    ["script", {}, tts()],
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [

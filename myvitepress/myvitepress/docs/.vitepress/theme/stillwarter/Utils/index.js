@@ -2,9 +2,10 @@
 
 const keyw = 768;
 export function isMobile() {
-  let flag = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
-  );
+  let flag =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
 
   const w = window.innerWidth;
   if (w <= keyw) {
@@ -56,4 +57,33 @@ const debouncedResize = debounce(function () {
 export function getTheme() {
   const classname = document.getElementsByTagName("html")[0].className;
   return classname || "day";
+}
+
+// window.onload()=function(){
+//   console.log('111');
+// }
+// if (document.readyState === "complete") {
+//   console.log(1);
+// } else {
+//   console.log(2);
+// }
+
+// setInterval(() => {
+//   if (document.readyState === "complete") {
+//     console.log(1);
+//   } else {
+//     console.log(2);
+//   }
+// }, 1000);
+
+export function tts() {
+  return `
+setInterval(() => {
+  if (document.readyState === "complete") {
+    console.log(1);
+  } else {
+    console.log(2);
+  }
+}, 1000);
+  `;
 }

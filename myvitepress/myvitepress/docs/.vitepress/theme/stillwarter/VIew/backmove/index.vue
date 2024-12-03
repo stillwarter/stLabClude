@@ -34,17 +34,10 @@ function useBM() {
 }
 
 onMounted(() => {
-  window.addEventListener("load", function () {
-    const canvas: any = document.getElementById("myCanvas");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const ctx = el.value.getContext("2d");
-  });
+  canvaSetSize();
 
   window.onresize = function () {
-    const canvas: any = document.getElementById("myCanvas");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const canvas: any = canvaSetSize();
     const ctx = el.value.getContext("2d");
     setTimeout(() => {
       pendingTasks = [];
@@ -175,6 +168,13 @@ onMounted(() => {
     lineTo(b.start, getEndPoint(b), ctx);
   }
 });
+
+function canvaSetSize() {
+  const canvas: any = document.getElementById("myCanvas");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  return canvas;
+}
 </script>
 
 <style lang="less" scoped>

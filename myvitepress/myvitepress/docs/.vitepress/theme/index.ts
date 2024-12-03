@@ -7,8 +7,7 @@ import "./style.css";
 import { Icon } from "@iconify/vue/dist/iconify.js";
 import antdVue from "ant-design-vue";
 import "ant-design-vue/dist/reset.css";
-import VueLazyLoad from 'vue-lazyload';
-
+import VueLazyLoad from "vue-lazyload";
 
 // my?
 import home from "./stillwarter/home.vue";
@@ -31,10 +30,11 @@ export default {
   Layout: () => {
     window.onload = () => {
       // 记录初始化页面尺寸
-      sessionStorage.setItem('windowW',window.innerWidth)
+      sessionStorage.setItem("windowW", window.innerWidth.toString());
       // 初始化pageAniStatus·
       PageTranfromDrivejs();
       // 监听隐藏的a标签
+
       const VPNavDom: any = document.querySelector(".VPNav");
       const observer = new MutationObserver(function (mutationsList) {
         for (const mutation of mutationsList) {
@@ -57,10 +57,8 @@ export default {
       // 开始观察目标父元素
       observer.observe(VPNavDom, config);
     };
-    
     // 屏幕尺寸改变监听
-    checkWindow()
-
+    checkWindow();
     return h(DefaultTheme.Layout, null, {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
       "layout-bottom": () => h(bm),
@@ -86,4 +84,3 @@ export default {
     app.component("PageTranfromDrive", PageTranfromDrive);
   },
 } satisfies Theme;
-
