@@ -66,6 +66,10 @@ p {
   .title {
     font-size: 24px;
     margin-bottom: 12px;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .intro {
     font-size: 14px;
