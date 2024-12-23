@@ -24,18 +24,20 @@ interface Branch {
   theta: number;
 }
 
-const unuseUrl = "myFriends";
+const unuseUrl = ["myFriends", "aboutMe"];
 function useBM() {
-  if (window.location.href.includes(unuseUrl)) {
-    return false;
-  } else {
-    return true;
+  let flg = true;
+  for (const item of unuseUrl) {
+    if (window.location.href.includes(item)) {
+      flg = false;
+      break;
+    }
   }
+  return flg;
 }
 
 onMounted(() => {
   canvaSetSize();
-
   window.onresize = function () {
     const canvas: any = canvaSetSize();
     const ctx = el.value.getContext("2d");

@@ -16,6 +16,7 @@ const nav = [
   { text: "Home", link: "/" },
   { text: "blogs", link: "/allBlogs" },
   { text: "friends", link: "/myFriends" },
+  { text: "aboutme", link: "/aboutMe" },
 ];
 
 /* 重置a标签 阻止默认跳转 */

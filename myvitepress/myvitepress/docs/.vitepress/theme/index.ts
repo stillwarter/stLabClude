@@ -13,7 +13,7 @@ import VueLazyLoad from "vue-lazyload";
 import home from "./stillwarter/home.vue";
 import allBlogs from "./stillwarter/allBlogs.vue";
 import myFriends from "./stillwarter/myFriends.vue";
-
+import aboutme from "./stillwarter/aboutme.vue";
 // Drive
 import PageTranfromDrive from "./stillwarter/Modules/PageTranfromDrive/PageTranfromDrive.vue";
 import {
@@ -80,6 +80,7 @@ export default {
     app.component("home", home);
     app.component("allblogs", allBlogs);
     app.component("myFriends", myFriends);
+    app.component("aboutme", aboutme);
     // Drive
     app.component("PageTranfromDrive", PageTranfromDrive);
   },

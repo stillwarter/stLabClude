@@ -16,6 +16,7 @@ export default defineConfig({
       { text: "Home", link: "/" },
       { text: "blogs", link: "/allBlogs" },
       { text: "friends", link: "/myFriends" },
+      { text: "aboutme", link: "/aboutMe" },
     ],
     other: {
       post: await getPosts(),
