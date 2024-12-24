@@ -17,7 +17,7 @@ onMounted(() => {
 function cccc() {
   setInterval(() => {
     if (document.readyState === "complete") {
-      console.log(1);
+      // console.log(1);  
     } else {
       console.log(2);
     }
