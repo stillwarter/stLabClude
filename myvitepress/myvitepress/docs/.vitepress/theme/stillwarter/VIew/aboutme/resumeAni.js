@@ -1,7 +1,13 @@
 /**
  * 介绍渲染动画
  */
-import { astep, astepPro, addHeadStyle, stepDetailImg } from "./arender";
+import {
+  astep,
+  astepPro,
+  addHeadStyle,
+  stepDetailImg,
+  addHeadStyleSync,
+} from "./arender";
 
 /**
  * 1.开头语
@@ -93,14 +99,16 @@ async function startAni() {
   await astep("添加一个容器装简历内容", dom);
   await astepPro("", centerdom, "div", "resumebox");
   await astep("增加resume样式", dom);
-  astep(resumeboxStyle, cssdom).then(() => {
-    addHeadStyle(resumeboxStyle);
-    const resumeboxdom = document.querySelector(".resumebox");
-    observer.observe(resumeboxdom, config);
-    setTimeout(() => {
-      setRuHead();
-    }, 500);
-  });
+  await astep(resumeboxStyle, cssdom);
+  await addHeadStyleSync(resumeboxStyle);
+  // astep(resumeboxStyle, cssdom).then(() => {
+  //   addHeadStyle(resumeboxStyle);
+  //   const resumeboxdom = document.querySelector(".resumebox");
+  //   observer.observe(resumeboxdom, config);
+  //   setTimeout(() => {
+  //     setRuHead();
+  //   }, 500);
+  // });
 }
 
 /**
@@ -120,8 +128,6 @@ async function setRuHead() {
     addHeadStyle(stHeadImgStyle);
   });
 }
-
-
 
 /* ---------------------------------- */
 /* 常用窗口增加文字或code */

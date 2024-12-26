@@ -45,6 +45,16 @@ export function addHeadStyle(stylecontent) {
   document.querySelector("head").appendChild(sdom);
 }
 
+export function addHeadStyleSync(stylecontent) {
+  return new Promise((resolve, reject) => {
+    const sdom = document.createElement("style");
+    sdom.type = "text/css";
+    sdom.innerHTML = stylecontent;
+    document.querySelector("head").appendChild(sdom);
+    resolve("Step result");
+  });
+}
+
 /* 多类型支持的dom增加函数 */
 export function astepPro(word, parentDom, domType, className = "") {
   return new Promise((resolve, reject) => {
