@@ -65,3 +65,14 @@ export function astepPro(word, parentDom, domType, className = "") {
     }, renderIntervalAsepPro);
   });
 }
+
+/* 增加img元素函数 */
+export function stepDetailImg(parenDdom, url, className = "") {
+  return new Promise((resolve, reject) => {
+    const dom = document.createElement("img");
+    dom.className = className;
+    dom.src = url;
+    parenDdom.appendChild(dom);
+    resolve("Step result");
+  });
+}
