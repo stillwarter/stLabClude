@@ -86,3 +86,49 @@ export function stepDetailImg(parenDdom, url, className = "") {
     resolve("Step result");
   });
 }
+
+/* 特化：叙述内容 */
+export function specialTipAstep(word) {
+  const tipdom = document.querySelector(".left");
+  return new Promise((resolve, reject) => {
+    const pdom = document.createElement("p");
+    let i = 0;
+    let len = word.length;
+    let intervalId = setInterval(() => {
+      if (i < len) {
+        pdom.innerHTML += word[i++];
+        tipdom.appendChild(pdom);
+      } else {
+        clearInterval(intervalId);
+        resolve("Step result");
+      }
+    }, renderIntervalAstep);
+  });
+}
+
+/* 特化：叙述内容+cssbox内容+增加csshead */
+export function specialCssboxLinkAstep(word, stylecontent) {
+  const tipdom = document.querySelector(".left");
+  const cssboxdom = document.querySelector(".cssbox");
+  return new Promise((resolve, reject) => {
+    const pdom = document.createElement("p");
+    const sdom = document.createElement("p");
+    let i = 0;
+    let j = 0;
+    let len = word.length;
+    let lens = stylecontent.length;
+    let intervalId = setInterval(() => {
+      if (i < len) {
+        pdom.innerHTML += word[i++];
+        tipdom.appendChild(pdom);
+      } else if (j < lens) {
+        sdom.innerHTML += stylecontent[j++];
+        cssboxdom.appendChild(sdom);
+      } else {
+        addHeadStyle(stylecontent);
+        clearInterval(intervalId);
+        resolve("Step result");
+      }
+    }, renderIntervalAstep);
+  });
+}

@@ -80,9 +80,16 @@ function astepPro(word, parentDom, domType, className = "") {
 }
 `;
 
+export const resumeboxHeadbox=`
+.resumeboxhead{
+  display:flex;
+}
+`
+
 export const stHeadImgStyle = `
 .sthaedImg{
   border-radius: 50%;
   width:200px
 }
 `;
+

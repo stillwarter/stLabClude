@@ -7,6 +7,8 @@ import {
   addHeadStyle,
   stepDetailImg,
   addHeadStyleSync,
+  specialTipAstep,
+  specialCssboxLinkAstep,
 } from "./arender";
 
 /**
@@ -40,9 +42,8 @@ import { desWordsCN } from "./aconfig";
 import { setClassname } from "./arender";
 import { layoutstyle } from "./aconfig";
 export const tipboxSet = async () => {
-  const rootdom = document.querySelector(".left");
   for (const item of desWordsCN) {
-    await astep(item, rootdom);
+    await specialTipAstep(item);
   }
   setTimeout(() => {
     addHeadStyle(layoutstyle);
@@ -80,8 +81,7 @@ export const cssandjsTipboxSet = async () => {
  */
 import { initjsFuncWords } from "./aconfig";
 const contextResume = async () => {
-  const dom = document.querySelector(".left");
-  await astep("准备前置需要用到的js函数", dom);
+  await specialTipAstep("准备前置需要用到的js函数");
   setTimeout(() => {
     startAni();
   }, 10);
@@ -92,23 +92,25 @@ const contextResume = async () => {
  */
 import { resumeboxStyle } from "./aconfig";
 async function startAni() {
-  const dom = document.querySelector(".left");
   const cssdom = document.querySelector(".cssbox");
   const centerdom = document.querySelector(".center");
-  await astep("开始绘制简历内容", dom);
-  await astep("添加一个容器装简历内容", dom);
+  await specialTipAstep("开始绘制简历内容");
+  await specialTipAstep("添加一个容器装简历内容");
   await astepPro("", centerdom, "div", "resumebox");
-  await astep("增加resume样式", dom);
-  await astep(resumeboxStyle, cssdom);
-  await addHeadStyleSync(resumeboxStyle);
-  // astep(resumeboxStyle, cssdom).then(() => {
-  //   addHeadStyle(resumeboxStyle);
-  //   const resumeboxdom = document.querySelector(".resumebox");
-  //   observer.observe(resumeboxdom, config);
-  //   setTimeout(() => {
-  //     setRuHead();
-  //   }, 500);
-  // });
+  await specialCssboxLinkAstep("增加resume样式", resumeboxStyle);
+  setRuHeadBox();
+}
+
+/**
+ * 7.准备头部容器
+ */
+import { resumeboxHeadbox } from "./aconfig";
+async function setRuHeadBox() {
+  await specialTipAstep("增加简历头盒子");
+  const resumeboxdom = document.querySelector(".resumebox");
+  await astepPro("", resumeboxdom, "div", "resumeHeadbox");
+  await specialCssboxLinkAstep("增加简历头盒子样式", resumeboxHeadbox);
+  setRuHead();
 }
 
 /**
@@ -117,30 +119,22 @@ async function startAni() {
 import { stHeadImgStyle } from "./aconfig";
 async function setRuHead() {
   const resumeboxdom = document.querySelector(".resumebox");
-  const leftdom = document.querySelector(".left");
-  const cssdom = document.querySelector(".cssbox");
   const myheadurl =
     "https://file.fishpi.cn/2022/07/MOSHED2022621164630-1b1ec532.gif?imageView2/1/w/210/h/210/interlace/0/q/100";
+  await specialTipAstep("添加照片");
   await stepDetailImg(resumeboxdom, myheadurl, "sthaedImg");
-  await astep("添加照片", leftdom);
-  await astep("修改照片样式", leftdom);
-  astep(stHeadImgStyle, cssdom).then(() => {
-    addHeadStyle(stHeadImgStyle);
-  });
+  await specialCssboxLinkAstep("修改照片样式", stHeadImgStyle);
+
+  
 }
 
 /* ---------------------------------- */
-/* 常用窗口增加文字或code */
-async function addWCJS(wc) {
-  const jsdom = document.querySelector(".jsbox");
-  await astep(wc, jsdom);
-}
+/**
+ * 元素增加组合（将涉及到的jsbox和cssbox绑定
+ * 有时候增加元素需要联动jsbox或cssbox内容的增加，这时候就需要联动了，单独分开写很麻烦
+ */
 
-async function addWCss(wc) {
-  const cssdom = document.querySelector(".cssbox");
-  await astep(wc, cssdom);
-}
-
+/* 窗口高度监听 */
 const observer = new MutationObserver((mutations) => {
   for (const mutation of mutations) {
     if (mutation.type === "childList") {
