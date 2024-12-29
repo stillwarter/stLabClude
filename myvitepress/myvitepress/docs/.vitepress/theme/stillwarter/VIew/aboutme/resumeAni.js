@@ -72,9 +72,9 @@ export const cssandjsTipboxSet = async () => {
   const cssdom = document.querySelector(".cssbox");
   const tipdom = document.querySelector(".left");
   setTimeout(() => {
-    observer.observe(jsdom, config);
-    observer.observe(cssdom, config);
-    observer.observe(tipdom, config);
+    observer().observe(jsdom, config);
+    observer().observe(cssdom, config);
+    observer().observe(tipdom, config);
     contextResume();
   }, 0);
 };
@@ -169,7 +169,7 @@ async function setStSkillsList() {
   const resumeboxdom = document.querySelector(".resumebox");
   await astepPro("", resumeboxdom, "div", "stSkillList");
   const stskilllistdom = document.querySelector(".stSkillList");
-  observer.observe(stskilllistdom, config);
+  observer().observe(stskilllistdom, config);
   await astep("积累的技能：", stskilllistdom);
   await astep(
     "javascript，熟悉js，会用原生js来写一些奇怪的效果",
@@ -198,7 +198,7 @@ async function setStWorkList() {
   const resumeboxdom = document.querySelector(".resumebox");
   await astepPro("", resumeboxdom, "div", "stWorkList");
   const stworklistdom = document.querySelector(".stWorkList");
-  observer.observe(stworklistdom, config);
+  observer().observe(stworklistdom, config);
   await specialCssboxLinkAstep("......", stWorkListStyle);
   await astep("个人做的项目：", stworklistdom);
   await astep(
@@ -260,13 +260,16 @@ async function resumend() {
  */
 
 /* 窗口高度监听 */
-const observer = new MutationObserver((mutations) => {
-  for (const mutation of mutations) {
-    if (mutation.type === "childList") {
-      checkHeight(mutation.target);
+const observer = () => {
+  return new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      if (mutation.type === "childList") {
+        checkHeight(mutation.target);
+      }
     }
-  }
-});
+  });
+};
+
 const config = { childList: true };
 function checkHeight(targetElement) {
   const currentScrollHeight = targetElement.scrollHeight;
