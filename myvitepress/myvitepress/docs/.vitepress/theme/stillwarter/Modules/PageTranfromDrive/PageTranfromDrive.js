@@ -6,10 +6,10 @@ export const anidelay = 1;
  * 在需要过渡的时候开启过渡动画
  */
 export const PageTranfromDrive = () => {
-  resetHeadMeun();
-  // setTimeout(() => {
-  //   setAniStatus();
-  // }, 0);
+  setTimeout(() => {
+    resetHeadMeun();
+    // setAniStatus();
+  }, 0);
 };
 
 const nav = [
@@ -44,6 +44,11 @@ export const checkPageMoveState = () => {
 
 /* 跳转点击（进入跳转动画） */
 function headMeunLink(e) {
+  const textctx = e.target.textContent;
+  if (textctx == "aboutme") {
+    window.open("./aboutMe");
+    return;
+  }
   // console.log("进入跳转动画");
   const appMaskDom = document.querySelector("#appMask");
   setTimeout(() => {
@@ -52,13 +57,9 @@ function headMeunLink(e) {
   }, 0);
 
   setTimeout(() => {
-    // window.location.href = "./allBlogs.html";
-    // console.log(e.target.textContent);
     const textctx = e.target.textContent;
-
     const alink = document.querySelectorAll(".VPLink");
     for (const item of alink) {
-      console.log(item.link);
       if (item.linktext == textctx) {
         window.location.href = item.link;
         break;

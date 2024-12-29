@@ -11,7 +11,7 @@ onMounted(() => {
   cccc();
   setTimeout(() => {
     checkPageMoveState();
-  }, 20);
+  }, 40);
 });
 
 function cccc() {

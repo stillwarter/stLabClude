@@ -1,4 +1,8 @@
-import { renderIntervalAstep, renderIntervalAsepPro } from "./aconfig";
+import {
+  renderIntervalAstep,
+  renderIntervalAsepPro,
+  renderIntervalJsAstep,
+} from "./aconfig";
 /**
  * 驱动doc增加内容的通用函数--v0.1
  */
@@ -129,6 +133,25 @@ export function specialCssboxLinkAstep(word, stylecontent) {
         clearInterval(intervalId);
         resolve("Step result");
       }
-    }, renderIntervalAstep);
+    }, renderIntervalJsAstep);
+  });
+}
+
+/* 特化：jsbox内容增加 */
+export function specialJsboxLinkAstep(word) {
+  const jsboxdom = document.querySelector(".jsbox");
+  return new Promise((resolve, reject) => {
+    const pdom = document.createElement("p");
+    let i = 0;
+    let len = word.length;
+    let intervalId = setInterval(() => {
+      if (i < len) {
+        pdom.innerHTML += word[i++];
+        jsboxdom.appendChild(pdom);
+      } else {
+        clearInterval(intervalId);
+        resolve("Step result");
+      }
+    }, renderIntervalJsAstep);
   });
 }
