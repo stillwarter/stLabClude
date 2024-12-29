@@ -82,13 +82,11 @@ export const cssandjsTipboxSet = async () => {
 /**
  * 5.前置js函数准备（展示）
  */
-import { initjsFuncWords } from "./aconfig";
+import { initjsFuncWords, contextResumeCtx } from "./aconfig";
 const contextResume = async () => {
   await specialTipAstep("准备前置需要用到的js函数");
   await specialJsboxLinkAstep(initjsFuncWords);
-  await specialJsboxLinkAstep(
-    "contextResume=" + contextResume.toString().replace(/\n/g, "")
-  );
+  await specialJsboxLinkAstep(contextResumeCtx);
   setTimeout(() => {
     startAni();
   }, 10);
@@ -97,9 +95,9 @@ const contextResume = async () => {
 /**
  * 6.正式准备绘制简历块儿 绘制外围边框
  */
-import { resumeboxStyle } from "./aconfig";
+import { resumeboxStyle, startAniCtx } from "./aconfig";
 async function startAni() {
-  await specialJsboxLinkAstep(startAni.toString().replace(/\n/g, ""));
+  await specialJsboxLinkAstep(startAniCtx);
   const centerdom = document.querySelector(".center");
   await specialTipAstep("开始绘制简历内容");
   await specialTipAstep("添加一个容器装简历内容");
@@ -111,9 +109,9 @@ async function startAni() {
 /**
  * 7.准备头部容器
  */
-import { resumeboxHeadbox } from "./aconfig";
+import { resumeboxHeadbox, setRuHeadBoxCtx } from "./aconfig";
 async function setRuHeadBox() {
-  await specialJsboxLinkAstep(setRuHeadBox.toString().replace(/\n/g, ""));
+  await specialJsboxLinkAstep(setRuHeadBoxCtx);
   await specialTipAstep("增加简历头盒子");
   const resumeboxdom = document.querySelector(".resumebox");
   await astepPro("", resumeboxdom, "div", "resumeHeadbox");
@@ -126,9 +124,9 @@ async function setRuHeadBox() {
 /**
  * 7.绘制简历头部内容
  */
-import { stHeadImgStyle, resumeboxHeadboxLine } from "./aconfig";
+import { stHeadImgStyle, setRuHeadCtx } from "./aconfig";
 async function setRuHead() {
-  await specialJsboxLinkAstep(setRuHead.toString().replace(/\n/g, ""));
+  await specialJsboxLinkAstep(setRuHeadCtx);
   const resumeboxHeaddom = document.querySelector(".resumeHeadbox");
   const myheadurl =
     "https://file.fishpi.cn/2022/07/MOSHED2022621164630-1b1ec532.gif?imageView2/1/w/210/h/210/interlace/0/q/100";
@@ -153,7 +151,6 @@ async function setRuHead() {
     stheadInfodom
   );
   await astep("这也是stillwarter.github.io存在的初衷。", stheadInfodom);
-  await specialCssboxLinkAstep("增加分界线", resumeboxHeadboxLine);
   setTimeout(() => {
     setStSkillsList();
   }, 0);
@@ -162,9 +159,10 @@ async function setRuHead() {
 /**
  * 8.工作技能叙述
  */
-import { stSkillListLine } from "./aconfig";
+import { stSkillListLine, setStSkillsListCtx } from "./aconfig";
 async function setStSkillsList() {
-  await specialJsboxLinkAstep(setStSkillsList.toString().replace(/\n/g, ""));
+  await specialJsboxLinkAstep(setStSkillsListCtx);
+  await specialCssboxLinkAstep("增加分界线", stSkillListLine);
   await specialTipAstep("增加工作技能叙述");
   const resumeboxdom = document.querySelector(".resumebox");
   await astepPro("", resumeboxdom, "div", "stSkillList");
@@ -182,7 +180,6 @@ async function setStSkillsList() {
   );
   await astep("electorn，会用elctron开发一些简单的桌面软件", stskilllistdom);
   await astep("未来会学习更多技能，创造更加神奇的页面效果！", stskilllistdom);
-  await specialCssboxLinkAstep("增加分界线", stSkillListLine);
   setTimeout(() => {
     setStWorkList();
   }, 0);
@@ -191,9 +188,9 @@ async function setStSkillsList() {
 /**
  * 9.个人开源作品叙述
  */
-import { stWorkListStyle } from "./aconfig";
+import { stWorkListStyle, setStWorkListCtx } from "./aconfig";
 async function setStWorkList() {
-  await specialJsboxLinkAstep(setStWorkList.toString().replace(/\n/g, ""));
+  await specialJsboxLinkAstep(setStWorkListCtx);
   await specialTipAstep("增加工作技能叙述");
   const resumeboxdom = document.querySelector(".resumebox");
   await astepPro("", resumeboxdom, "div", "stWorkList");
