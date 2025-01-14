@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.12.0/devicon.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description"
+    content="A chat concept application where users can interact with others in real-time in 3D space with 3D avatars." />
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://avatar-chat.herokuapp.com">
+  <meta property="og:title" content="Avatar Chat">
+  <meta property="og:description"
+    content="A chat concept application where users can interact with others in real-time in 3D space with 3D avatars.">
+  <meta property="og:image" content="%PUBLIC_URL%/avatar-thumbnail.gif">
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+  <title>Avatar Chat</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      outline: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Otomanopee One', sans-serif;
+    }
+
+    #chatbox {
+      height: 250px;
+      width: 400px;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      background-color: black;
+      opacity: 0.5;
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+    }
+
+    #chatbox__form {
+      width: 100%;
+    }
+
+
+    #chatbox__chat {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column-reverse;
+      overflow: auto;
+      overflow-x: hidden;
+      will-change: scroll-position;
+      padding: 5px 10px;
+    }
+
+    #chatbox__chat::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+      border-radius: 8px;
+      background-color: transparent;
+    }
+
+    #chatbox__chat::-webkit-scrollbar-thumb {
+      background: #bbb;
+      border-radius: 8px;
+    }
+
+    #chatbox__chat:hover::-webkit-scrollbar-thumb {
+      background: #e4e4e4;
+    }
+
+    #chatbox__chat::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 8px;
+    }
+
+    #chatbox__input {
+      font-size: 15px;
+      width: 100%;
+      padding: 5px 10px;
+      font-family: 'Otomanopee One', sans-serif;
+
+    }
+
+    li {
+      color: white;
+    }
+
+    #login {
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+      background-image: url("./background.png"); 
+      opacity: 0.95;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+
+    #background {
+      background-color: black;
+      background-image: radial-gradient(rgb(51, 51, 51), black);
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      opacity: 0.8;
+      z-index: -1;
+    }
+
+    #login__label {
+      color: white;
+    }
+
+    #login__header {
+      color: white;
+      margin-bottom: 10px;
+      font-size: 70px;
+
+    }
+
+    #login__header3 {
+      margin-bottom: 20px;
+      font-size: 30px;
+    }
+
+    #login p {
+      color: white;
+      align-self: flex-start;
+    
+    }
+
+    #login__controls {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    #login__form {
+      display: flex;
+      flex-direction: column;
+      background-position: center center;
+    }
+
+    #login__input {
+      padding: 5px 10px 5px 10px;
+      font-size: 20px;
+      font-family: 'Otomanopee One', sans-serif;
+      display: flex;
+      align-items: center;
+    }
+
+    h3 {
+      color: white;
+      margin-bottom: 5px;
+    }
+
+    .username {
+      color: #3B82F6;
+    }
+
+    .friend {
+      color: #F59E0B;
+    }
+
+    a,
+    a:focus,
+    a:active,
+    a:hover {
+      text-decoration: none;
+    }
+
+    #icons {
+      margin-top: 70px;
+      position: absolute;
+      bottom: 40px;
+      display: flex;
+    }
+
+    i,svg {
+      color: white;
+      font-size: 30px;
+      margin-left: 15px;
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+
+
+    #login__created {
+      font-size: 20px;
+      margin: -10px auto 70px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+  <div id="login">
+    <div id="background"></div>
+    <h1 id="login__header">Avatar Chat</h1>
+    <p id="login__created">Created by Inho Lee</p>
+    <h3 id="login__header3">Chat with friends in 3D!</h3>
+    <div id="login__controls">
+      <h3>Controls:</h3>
+      <p>- W,A,S,D to move around</p>
+      <p>- Hold shift to run</p>
+    </div>
+    <form id="login__form" autocomplete="off">
+      <p id="login__form-header">Enter a username to start chatting:</p>
+
+      <input type="text" id="login__input"></input>
+    </form>
+
+    <div id="icons">
+      <a href="https://www.github.com/inhojl" target="_blank"><i class="devicon-github-original"></i></a>
+      <a href="https://www.linkedin.com/in/inhojl" target="_blank"><i class="devicon-linkedin-plain"></i></a>
+      <a href="https://angel.co/u/inhojl" target="_blank"><svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="angellist" class="svg-inline--fa fa-angellist fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M347.1 215.4c11.7-32.6 45.4-126.9 45.4-157.1 0-26.6-15.7-48.9-43.7-48.9-44.6 0-84.6 131.7-97.1 163.1C242 144 196.6 0 156.6 0c-31.1 0-45.7 22.9-45.7 51.7 0 35.3 34.2 126.8 46.6 162-6.3-2.3-13.1-4.3-20-4.3-23.4 0-48.3 29.1-48.3 52.6 0 8.9 4.9 21.4 8 29.7-36.9 10-51.1 34.6-51.1 71.7C46 435.6 114.4 512 210.6 512c118 0 191.4-88.6 191.4-202.9 0-43.1-6.9-82-54.9-93.7zM311.7 108c4-12.3 21.1-64.3 37.1-64.3 8.6 0 10.9 8.9 10.9 16 0 19.1-38.6 124.6-47.1 148l-34-6 33.1-93.7zM142.3 48.3c0-11.9 14.5-45.7 46.3 47.1l34.6 100.3c-15.6-1.3-27.7-3-35.4 1.4-10.9-28.8-45.5-119.7-45.5-148.8zM140 244c29.3 0 67.1 94.6 67.1 107.4 0 5.1-4.9 11.4-10.6 11.4-20.9 0-76.9-76.9-76.9-97.7.1-7.7 12.7-21.1 20.4-21.1zm184.3 186.3c-29.1 32-66.3 48.6-109.7 48.6-59.4 0-106.3-32.6-128.9-88.3-17.1-43.4 3.8-68.3 20.6-68.3 11.4 0 54.3 60.3 54.3 73.1 0 4.9-7.7 8.3-11.7 8.3-16.1 0-22.4-15.5-51.1-51.4-29.7 29.7 20.5 86.9 58.3 86.9 26.1 0 43.1-24.2 38-42 3.7 0 8.3.3 11.7-.6 1.1 27.1 9.1 59.4 41.7 61.7 0-.9 2-7.1 2-7.4 0-17.4-10.6-32.6-10.6-50.3 0-28.3 21.7-55.7 43.7-71.7 8-6 17.7-9.7 27.1-13.1 9.7-3.7 20-8 27.4-15.4-1.1-11.2-5.7-21.1-16.9-21.1-27.7 0-120.6 4-120.6-39.7 0-6.7.1-13.1 17.4-13.1 32.3 0 114.3 8 138.3 29.1 18.1 16.1 24.3 113.2-31 174.7zm-98.6-126c9.7 3.1 19.7 4 29.7 6-7.4 5.4-14 12-20.3 19.1-2.8-8.5-6.2-16.8-9.4-25.1z"></path></svg></a>
+    </div>
+
+  </div>
+  <div id="chatbox">
+    <ul id="chatbox__chat">
+
+    </ul>
+    <form id="chatbox__form" autocomplete="off">
+      <input type="text" id="chatbox__input" />
+    </form>
+  </div>
+  <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+</body>
+
+</html>
